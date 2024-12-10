@@ -9,7 +9,7 @@
 
     <h1>Login</h1>
 
-    <form id="login" action="/api/users/login">
+    <form id="login" method="post" action="/api/users/login">
 
         <div>
             <label for="email">Email:</label>
@@ -17,8 +17,8 @@
         </div>
 
         <div>
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha"  id="senha" required>
+            <label for="password">Senha:</label>
+            <input type="password" name="password"  id="senha" required>
         </div>
 
         <input type="submit" value="Login" id="btnLogin">
