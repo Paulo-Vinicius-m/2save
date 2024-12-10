@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cadastro - Food to save</title>
+    <title> Cadastro</title>
 </head>
 <body>
 
     <h1>Cadastre-se</h1>
 
-    <form id="cadastro">
+    <form id="cadastro" method="post" action="/api/users/register">
 
         <div>
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome">
+            <input type="text" name="name" id="nome">
         </div>
 
         
@@ -23,26 +23,26 @@
         </div>
 
         <div>
-            <label for="email-confirmação">Confirmação do Email:</label>
-            <input type="email" name="email-confirmação"  id="email-confirmação" required>
+            <label for="email2">Confirmação do Email:</label>
+            <input type="email" name="email2"  id="email-confirmação" required>
         </div>
 
         <div>
-            <label for="tipo-usuario">Tipo de usário:</label>
-            <input type="text" name="tipo-usuario"  id="tipo-usuario" required>
+            <label for="tipo">Tipo de usário:</label>
+            <input type="text" name="tipo"  id="tipo-usuario" required>
         </div>
 
         <div>
-            <label for="cpf">CPF:</label>
-            <input type="number" name="cpf"  id="cpf" required>
+            <label for="identificador">CPF:</label>
+            <input type="text" name="identificador"  id="cpf" required>
         </div>
 
         <div>
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha"  id="senha" required>
+            <label for="password">Senha:</label>
+            <input type="password" name="password"  id="senha" required>
         </div>
 
-        <input type="button" value="Cadastre-se" id="btnCadastro">
+        <input type="submit" value="Cadastre-se" id="btnCadastro">
 
     </form>
     

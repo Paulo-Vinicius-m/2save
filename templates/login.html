@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login - Food to save</title>
+    <title> Login</title>
 </head>
 <body>
 
     <h1>Login</h1>
 
-    <form id="login">
+    <form id="login" method="post" action="/api/users/login">
 
         <div>
             <label for="email">Email:</label>
@@ -17,11 +17,11 @@
         </div>
 
         <div>
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha"  id="senha" required>
+            <label for="password">Senha:</label>
+            <input type="password" name="password"  id="senha" required>
         </div>
 
-        <input type="button" value="Login" id="btnLogin">
+        <input type="submit" value="Login" id="btnLogin">
 
     </form>
     
