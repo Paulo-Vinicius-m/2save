@@ -8,7 +8,10 @@ import jwt
 # Create your views here.
 #@ensure_csrf_cookie
 def register(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('ola')
+    return render(request, 'cadastro.html')
+
+def login(request: HttpRequest) -> HttpResponse:
+    return render(request, 'login.html')
 
 @autorize
 def home(request: HttpRequest) -> HttpResponse:
