@@ -3,18 +3,19 @@ Os pontos protegidos só podem ser acessados se o token de acesso for passado no
 
 ## /api/users/register
 Só aceita **POST**. O request body deve conter:
-- username (name)
-- email (email)
-- confirmação do email (email2)
-- tipo de usuário: "R" para restaurante e "C" para consumidor (tipo)
+- Username (name)
+- Email (email)
+- Confirmação do email (email2)
+- Senha (password)
+- Tipo de usuário: "R" para restaurante e "C" para consumidor (tipo)
 - cpf/cnpj (identificador)
 
 Retorna um json com o token de acesso.
 
 ## /api/users/login
 Só aceita **POST**. O body deve conter:
-- email (email)
-- senha (password)
+- Email (email)
+- Senha (password)
 
 Retorna um json com o token de acesso.
 
