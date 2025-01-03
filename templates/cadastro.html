@@ -7,44 +7,43 @@
 </head>
 <body>
 
-    <h1>Cadastre-se</h1>
+    <h1>Bem-vindo (a) à Appetit</h1>
 
-    <form id="cadastro" method="post" action="/api/users/register">
+    <form id="formulario-cadastro" method="post">
 
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" name="name" id="nome">
-        </div>
+        <fieldset>
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" placeholder="Nome" required>
 
-        
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email"  id="email" required>
-        </div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Email" required>
 
-        <div>
-            <label for="email2">Confirmação do Email:</label>
-            <input type="email" name="email2"  id="email-confirmação" required>
-        </div>
+            <label for="confirmacao-email">Confirmação de email</label>
+            <input type="email" name="email2"  id="confirmacao-email" placeholder="Confirmação do Email" required>
+        </fieldset>
 
-        <div>
-            <label for="tipo">Tipo de usário:</label>
-            <input type="text" name="tipo"  id="tipo-usuario" required>
-        </div>
+        <fieldset>
+            <label for="password">Senha</label>
+            <input type="password" name="password" placeholder="Senha" id="senha" required>
 
-        <div>
-            <label for="identificador">CPF:</label>
-            <input type="text" name="identificador"  id="cpf" required>
-        </div>
+            <label for="cpf">CPF:</label>
+            <input type="text" name="identificador"  id="cpf" placeholder="xxx.xxx.xxx-xx" required>
 
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" name="password"  id="senha" required>
-        </div>
+            <div>
+                <label for="tipo-usuario">Tipo de usuário:</label>
+                <input type="radio" name="tipo" id="consumidor" value="C" required>
+                <label for="consumidor">Pessoa Física</label>
+    
+                <input type="radio" name="tipo" id="restaurante" value="R" required>
+                <label for="restaurante">Pessoa Jurídica</label>
+            </div>
+        </fieldset>
 
-        <input type="submit" value="Cadastre-se" id="btnCadastro">
+        <input type="submit" value="Cadastre-se" id="btnCadastro" >
 
     </form>
+
+    <script src="/core/assets/js/cadastro.js"></script>
     
 </body>
 </html>
