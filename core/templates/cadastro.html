@@ -22,50 +22,41 @@
 
             <form class="formulario-cadastro" id="formulario-cadastro" method="post" action="/api/users/register">
                 
-                <div class="form-lado-esquerdo">
+                <div class="container-forms">
+                    <div class="form-lado-esquerdo">
+                        <label for="name">Nome</label>
+                        <input class="input-esquerdo" type="text" name="name" id="name" placeholder="Nome" required>
 
-                </div>
+                        <label for="email">Email</label>
+                        <input class="input-esquerdo" type="email" name="email" id="email" placeholder="Email" required>
 
-                <div class="form-lado-direito">
-                    
-                </div>
+                        <label for="confirmacao-email">Confirmação de email</label>
+                        <input class="input-esquerdo" type="email" name="email2"  id="confirmacao-email" placeholder="Confirmação do Email" required>
 
-
-
-                <!--
-                <fieldset>
-                    <label for="name">Nome</label>
-                    <input class="input-esquerdo" type="text" name="name" id="name" placeholder="Nome" required>
-
-                    <label for="password">Senha</label>
-                    <input type="password" name="password" placeholder="Senha" id="password" required>
-                </fieldset>
-
-                <fieldset>
-                    <label for="email">Email</label>
-                    <input class="input-esquerdo" type="email" name="email" id="email" placeholder="Email" required>
-
-                    <label for="cpf">CPF:</label>
-                    <input type="text" name="identificador"  id="cpf" placeholder="xxx.xxx.xxx-xx" required>
-                </fieldset>
-        
-                <fieldset class="container-tipo-usuario">
-                    <label for="confirmacao-email">Confirmação de email</label>
-                    <input class="input-esquerdo" type="email" name="email2"  id="confirmacao-email" placeholder="Confirmação do Email" required>
-    
-                    <div>
-                        <label>Tipo de usuário:</label>
-                        <input type="radio" name="tipo" id="consumidor" value="C" required>
-                        <label for="consumidor">Pessoa Física</label>
-            
-                        <input type="radio" name="tipo" id="restaurante" value="R" required>
-                        <label for="restaurante">Pessoa Jurídica</label>
                     </div>
-                </fieldset>
-        
-                <input type="submit" value="Cadastre-se" id="btnCadastro" >
+    
+                    <div class="form-lado-direito">
+                        <label for="password">Senha</label>
+                        <input type="password" name="password" placeholder="Senha" id="password" required>
 
-                -->
+                        <label for="cpf">CPF</label>
+                        <input type="text" name="identificador"  id="cpf" placeholder="xxx.xxx.xxx-xx" required>
+
+                        <div>
+                            <label>Tipo de usuário:</label>
+                            <div class="container-tipo-usuario">
+                                <input type="radio" name="tipo" id="consumidor" value="C" required>
+                                <label for="consumidor">Pessoa Física</label>
+                    
+                                <input type="radio" name="tipo" id="restaurante" value="R" required>
+                                <label for="restaurante">Pessoa Jurídica</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <input class="btn-submit" type="submit" value="Cadastre-se" id="btnCadastro" >
         
             </form>
         </section>

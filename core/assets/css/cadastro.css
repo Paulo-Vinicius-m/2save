@@ -55,11 +55,94 @@ body {
     color: #FFFFFF;
 }
 
-.form-lado-esquerdo .container-formulario{
+.container-forms {
     display: flex;
-    background-color: #ccc;
-    width: 200px;
-    height: 100px;
+    gap: 160px;
+    margin: 0 50px;
+}
+
+.form-lado-esquerdo, .form-lado-direito {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-lado-esquerdo label, .form-lado-direito label {
+    font-family: 'Hammersmith One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+
+}
+
+.form-lado-esquerdo input, .form-lado-direito input {
+    width: 259px;
+    height: 49px;
+    box-sizing: border-box;
+    background: #805A40;
+    border: 1px solid #BAB7B7;
+    border-radius: 2px;
+    margin-bottom: 30px;
+    padding-left: 9px;
+}
+
+.form-lado-esquerdo input::placeholder, .form-lado-direito input::placeholder {
+    font-family: 'Hammersmith One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(219, 219, 219, 0.5);
+}
+
+.container-tipo-usuario {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-lado-direito input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    box-sizing: border-box;
+    appearance: none;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+
+input[type="text"], input[type="email"], input[type="password"] {
+    color: #FFF; 
+}
+
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    outline: none; 
+    border-color: #FF6A00;
+}
+
+input[type="radio"]:checked {
+    background-color: #FF6A00; /* Cor de preenchimento */
+    
+}
+
+.btn-submit {
+    display: flex;
+    margin: 0 auto;
+    width: 300px;
+    height: 42.4px;
+    box-sizing: border-box;
+    background: #FF6A00;
+    border: 1px solid #BAB7B7;
+    border-radius: 5px;
+    font-family: 'Hammersmith One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
 }
 
 
