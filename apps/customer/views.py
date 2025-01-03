@@ -7,7 +7,6 @@ from users.utils import autorize
 # Create your views here.
 @autorize    
 def home(request: HttpRequest, payload: dict) -> HttpResponse:
-
     if request.method == 'GET':
         # Busca por nome de restaurante
 
@@ -16,6 +15,7 @@ def home(request: HttpRequest, payload: dict) -> HttpResponse:
             format='json', 
             queryset=Restaurante.objects.filter(username__icontains=name)
         )
+        
         return JsonResponse(
             data=restaurantes,
             status=200,

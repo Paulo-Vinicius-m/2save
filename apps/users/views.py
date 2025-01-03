@@ -7,18 +7,24 @@ from users.models import Restaurante, Consumidor
 from django.core.serializers import serialize
 import jwt
 from .utils import autorize
+import json
 
 
 def register(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid request method'}, status=405)
     
-    name = request.POST['name']
-    password = request.POST['password']
-    email1 = request.POST['email']
-    email2 = request.POST['email2']
-    tipo = request.POST['tipo']
-    identificador = request.POST['identificador']
+    if request.POST.__len__() == 0:
+        payload = json.loads(request.body.decode('utf-8'))
+    else:
+        payload = request.POST
+
+    name = payload['name']
+    password = payload['password']
+    email1 = payload['email']
+    email2 = payload['email2']
+    tipo = payload['tipo']
+    identificador = payload['identificador']
     
     if len(name) not in range(4, 20):
         return JsonResponse({'error': 'Invalid name length'}, status=400)
@@ -31,6 +37,9 @@ def register(request: HttpRequest) -> HttpResponse:
     
     # TODO - verify if it's a valid email
 
+    if User.objects.filter(username=name) or User.objects.filter(email=email1):
+        return JsonResponse({'error': 'User already exists'}, status=400)
+    
     if tipo == 'R':
         user = Restaurante.objects.create_user(
             username=name,
@@ -47,7 +56,10 @@ def register(request: HttpRequest) -> HttpResponse:
         )
 
     token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'consumer'}, key=SECRET_KEY, algorithm='HS256')
-    return JsonResponse({'message': 'User created', 'token': token}, status=201)
+    #return JsonResponse({'message': 'User created', 'token': token}, status=201)
+    response = HttpResponseRedirect('/home')
+    response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
+    return response
 
 def login(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
@@ -60,6 +72,8 @@ def login(request: HttpRequest) -> HttpResponse:
     
     if user.check_password(password):
         token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'consumer'},key=SECRET_KEY, algorithm='HS256')
-        return JsonResponse({'message': 'User logged in', 'token': token})
+        response = HttpResponseRedirect('/home')
+        response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
+        return response
 
 

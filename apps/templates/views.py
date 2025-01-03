@@ -15,6 +15,6 @@ def login(request: HttpRequest) -> HttpResponse:
 
 @autorize
 def home(request: HttpRequest) -> HttpResponse:
-    username = request.headers.get('Authorization').split(' ')[1]
+    username = request.COOKIES.get('Authorization')
     username = jwt.decode(username, key=SECRET_KEY, algorithms='HS256')['name']
     return HttpResponse('Bem vindo ' + username + '!')
