@@ -37,7 +37,7 @@ body {
 }
 
 .container-formulario section {
-    width: 794px;
+    width: 414px;
     height: 517px;
     background: rgba(84, 68, 56, 0.7);
     box-shadow: 0px 5px 10px rgba(186, 186, 186, 0.4), inset 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -45,7 +45,7 @@ body {
 }
 
 .titulo-formulario {
-    margin: 50px 0 40px;
+    margin: 60px 0 50px;
     text-align: center;
     font-family: 'Hammersmith One';
     font-style: normal;
@@ -55,18 +55,20 @@ body {
     color: #FFFFFF;
 }
 
-.container-forms {
-    display: flex;
-    gap: 160px;
-    margin: 0 50px;
-}
-
-.form-lado-esquerdo, .form-lado-direito {
+.formulario-login {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.form-lado-esquerdo label, .form-lado-direito label {
+.container-forms {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.container-forms label {
     font-family: 'Hammersmith One';
     font-style: normal;
     font-weight: 400;
@@ -74,21 +76,19 @@ body {
     line-height: 18px;
     color: #FFFFFF;
     margin-bottom: 4px;
-
 }
 
-.form-lado-esquerdo input, .form-lado-direito input {
-    width: 259px;
+.container-forms input {
+    width: 354px;
     height: 49px;
     box-sizing: border-box;
     background: #805A40;
     border: 1px solid #BAB7B7;
     border-radius: 5px;
-    margin-bottom: 30px;
     padding-left: 9px;
 }
 
-.form-lado-esquerdo input::placeholder, .form-lado-direito input::placeholder {
+.container-forms input::placeholder {
     font-family: 'Hammersmith One';
     font-style: normal;
     font-weight: 400;
@@ -97,42 +97,21 @@ body {
     color: rgba(219, 219, 219, 0.5);
 }
 
-.container-tipo-usuario {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.form-lado-direito input[type="radio"] {
-    width: 15px;
-    height: 15px;
-    box-sizing: border-box;
-    appearance: none;
-    border-radius: 50%;
-    background-color: transparent;
-}
-
-
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="email"], input[type="password"] {
     color: #FFF; 
 }
 
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+input[type="email"]:focus, input[type="password"]:focus {
     outline: none; 
     border-color: #FF6A00;
-}
-
-input[type="radio"]:checked {
-    background-color: #FF6A00; /* Cor de preenchimento */
-    
 }
 
 .btn-submit {
     display: flex;
     margin: 0 auto;
-    width: 300px;
-    height: 42.4px;
+    width: 353px;
+    height: 49px;
     box-sizing: border-box;
     background: #FF6A00;
     border: 1px solid #BAB7B7;
@@ -145,9 +124,12 @@ input[type="radio"]:checked {
     color: #FFFFFF;
 }
 
+.container-btn-cadastro {
+    margin-top: 30px;
+}
+
 .footer {
     width: 100%;
     height: 69px;
     background-color: #D46D24;
 }
-

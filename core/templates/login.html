@@ -3,12 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login</title>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body>
 
-    <h1>Login</h1>
+    <header class="container-header">
+        <div class="container-header-img">
+            <img src="/assets/img/retangulo-header.png" alt="Retangulo do cabeçalho">
+        </div>
+    </header>
 
+    <main class="container-formulario">
+        <section>
+            <h1 class="titulo-formulario">Bem-vindo (a) à Appetit</h1>
+
+            <form class="formulario-login" id="formulario-login" method="post"  action="/api/users/login">
+                
+                <div class="container-forms">
+                    <label for="email">Entrar:</label>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                </div>
+
+                <div class="container-forms">
+                    <input type="password" name="password" id="password" placeholder="Senha" required>
+                </div>
+
+                <input class="btn-submit" type="submit" value="Entrar" id="btnLogin">
+                
+                <div class="container-btn-cadastro">
+                    <input type="button" value="Cadastre-se" id="btnCadastro" onclick="window.location.href='/register'">
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <!--
     <form id="login" method="post" action="/api/users/login">
 
         <div>
@@ -18,16 +52,15 @@
 
         <div>
             <label for="password">Senha:</label>
-            <input type="password" name="password"  id="senha" required>
-        </div>
-
-        <div>
-            <input type="text">
+            <input type="password" name="password"  id="password" required>
         </div>
 
         <input type="submit" value="Login" id="btnLogin">
     
     </form>
+    -->
+
+    <footer class="footer"></footer>
     
 </body>
 
