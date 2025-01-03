@@ -5,7 +5,7 @@ async function cadastro(event) {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const email2 = document.getElementById("confirmacao-email").value.trim();
-    const password = document.getElementById("senha").value;
+    const password = document.getElementById("password").value;
     const identificador = document.getElementById("cpf").value.trim();
     const tipo = document.querySelector('input[name="tipo"]:checked').value;
 
@@ -19,7 +19,7 @@ async function cadastro(event) {
         email, 
         email2, 
         password, 
-        tipo: tipo.value, 
+        tipo, 
         identificador, 
     };
 
@@ -35,7 +35,7 @@ async function cadastro(event) {
         if (response.ok) {
             alert("Cadastro realizado com sucesso!");
             localStorage.setItem("authToken", result.token);
-            window.location.href = "/login"; // Redireciona para a tela de login
+            window.location.href = "/login";
         } else {
             alert(`Erro no cadastro: ${result.message || "Erro desconhecido."}`);
         }
@@ -46,5 +46,5 @@ async function cadastro(event) {
     } 
 }
 
-let formularioCadastro = document.getElementById('btnCadastro');
+let formularioCadastro = document.getElementById('formulario-cadastro');
 formularioCadastro.addEventListener('submit', cadastro);

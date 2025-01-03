@@ -5,48 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Cadastro</title>
 
-    <link rel="stylesheet" href="/core/assets/css/reset.css">
-    <link rel="stylesheet" href="/core/assets/css/cadastro.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/cadastro.css">
 </head>
 <body>
 
-    <h1>Bem-vindo (a) à Appetit</h1>
+    <header class="container-header">
+        <div class="container-header-img">
+            <img src="/assets/img/retangulo-header.png" alt="Retangulo do cabeçalho">
+        </div>
+    </header>
 
-    <form id="formulario-cadastro" method="post" action="/api/users/register">
+    <main class="container-formulario">
+        <section>
+            <h1 class="titulo-formulario">Bem-vindo (a) à Appetit</h1>
 
-        <fieldset>
-            <label for="name">Nome</label>
-            <input type="text" name="name" id="name" placeholder="Nome" required>
+            <form class="formulario-cadastro" id="formulario-cadastro" method="post" action="/api/users/register">
+                
+                <div class="form-lado-esquerdo">
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Email" required>
+                </div>
 
-            <label for="confirmacao-email">Confirmação de email</label>
-            <input type="email" name="email2"  id="confirmacao-email" placeholder="Confirmação do Email" required>
-        </fieldset>
+                <div class="form-lado-direito">
+                    
+                </div>
 
-        <fieldset>
-            <label for="password">Senha</label>
-            <input type="password" name="password" placeholder="Senha" id="senha" required>
 
-            <label for="cpf">CPF:</label>
-            <input type="text" name="identificador"  id="cpf" placeholder="xxx.xxx.xxx-xx" required>
 
-            <div>
-                <label for="tipo-usuario">Tipo de usuário:</label>
-                <input type="radio" name="tipo" id="consumidor" value="C" required>
-                <label for="consumidor">Pessoa Física</label>
+                <!--
+                <fieldset>
+                    <label for="name">Nome</label>
+                    <input class="input-esquerdo" type="text" name="name" id="name" placeholder="Nome" required>
+
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" placeholder="Senha" id="password" required>
+                </fieldset>
+
+                <fieldset>
+                    <label for="email">Email</label>
+                    <input class="input-esquerdo" type="email" name="email" id="email" placeholder="Email" required>
+
+                    <label for="cpf">CPF:</label>
+                    <input type="text" name="identificador"  id="cpf" placeholder="xxx.xxx.xxx-xx" required>
+                </fieldset>
+        
+                <fieldset class="container-tipo-usuario">
+                    <label for="confirmacao-email">Confirmação de email</label>
+                    <input class="input-esquerdo" type="email" name="email2"  id="confirmacao-email" placeholder="Confirmação do Email" required>
     
-                <input type="radio" name="tipo" id="restaurante" value="R" required>
-                <label for="restaurante">Pessoa Jurídica</label>
-            </div>
-        </fieldset>
+                    <div>
+                        <label>Tipo de usuário:</label>
+                        <input type="radio" name="tipo" id="consumidor" value="C" required>
+                        <label for="consumidor">Pessoa Física</label>
+            
+                        <input type="radio" name="tipo" id="restaurante" value="R" required>
+                        <label for="restaurante">Pessoa Jurídica</label>
+                    </div>
+                </fieldset>
+        
+                <input type="submit" value="Cadastre-se" id="btnCadastro" >
 
-        <input type="submit" value="Cadastre-se" id="btnCadastro" >
+                -->
+        
+            </form>
+        </section>
 
-    </form>
+    </main>
 
-    <script src="/core/assets/js/cadastro.js"></script>
+    <footer class="footer"></footer>
+
+    <script src="/assets/js/cadastro.js"></script>
     
 </body>
 </html>
