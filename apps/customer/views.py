@@ -3,13 +3,15 @@ from django.http import JsonResponse, HttpRequest, HttpResponse, HttpResponseRed
 from users.models import Restaurante, Consumidor, Produto
 from django.core.serializers import serialize
 from users.utils import autorize
+from django.contrib.auth.models import User
 
 # Create your views here.
 @autorize    
-def home(request: HttpRequest, payload: dict) -> HttpResponse:
+def home(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         # Busca por nome de restaurante
 
+        #all_objects = [*Restaurante.objects.all(), *User.objects.all()]
         name = request.GET.get('name', default='')
         restaurantes = serialize(
             format='json', 

@@ -57,7 +57,7 @@ def register(request: HttpRequest) -> HttpResponse:
 
     token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'consumer'}, key=SECRET_KEY, algorithm='HS256')
     #return JsonResponse({'message': 'User created', 'token': token}, status=201)
-    response = HttpResponseRedirect('/home')
+    response = JsonResponse({'message': 'User created', 'token': token}, status=201)
     response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
     return response
 
@@ -72,7 +72,7 @@ def login(request: HttpRequest) -> HttpResponse:
     
     if user.check_password(password):
         token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'consumer'},key=SECRET_KEY, algorithm='HS256')
-        response = HttpResponseRedirect('/home')
+        response = JsonResponse({'message': 'User authenticated', 'token': token}, status=200)
         response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
         return response
 
