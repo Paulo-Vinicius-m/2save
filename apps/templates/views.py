@@ -18,3 +18,6 @@ def home(request: HttpRequest) -> HttpResponse:
     username = request.COOKIES.get('Authorization')
     username = jwt.decode(username, key=SECRET_KEY, algorithms='HS256')['name']
     return HttpResponse('Bem vindo ' + username + '!')
+
+def inicio(request: HttpRequest) -> HttpResponse:
+    return render(request, 'tela-inicial.html')
