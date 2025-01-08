@@ -14,6 +14,7 @@ def register(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid request method'}, status=405)
     
+    ### Checa se o payload é um JSON ou um POST
     if request.POST.__len__() == 0:
         payload = json.loads(request.body.decode('utf-8'))
     else:
@@ -65,8 +66,14 @@ def login(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid request method'}, status=405)
     
-    email = request.POST['email']
-    password = request.POST['password']
+    ### Checa se o payload é um JSON ou um POST
+    if request.POST.__len__() == 0:
+        payload = json.loads(request.body.decode('utf-8'))
+    else:
+        payload = request.POST
+        
+    email = payload['email']
+    password = payload['password']
     
     user = User.objects.get(email=email)
     
@@ -75,5 +82,7 @@ def login(request: HttpRequest) -> HttpResponse:
         response = JsonResponse({'message': 'User authenticated', 'token': token}, status=200)
         response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
         return response
+    else:
+        return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
 
