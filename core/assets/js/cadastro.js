@@ -35,7 +35,7 @@ async function cadastro(event) {
         if (response.ok) {
             alert("Cadastro realizado com sucesso!");
             localStorage.setItem("authToken", result.token);
-            window.location.href = "/login";
+            window.location.href = "/";
         } else {
             alert(`Erro no cadastro: ${result.message || "Erro desconhecido."}`);
         }

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 body {
     height: 100vh;
     max-width: 1442px;
@@ -122,10 +121,24 @@ input[type="email"]:focus, input[type="password"]:focus {
     font-size: 14px;
     line-height: 18px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .container-btn-cadastro {
-    margin-top: 30px;
+    margin-top: 40px;
+}
+
+.btn-cadastro {
+    all: unset;
+    width: 90px;
+    height: 26px;
+    font-family: 'Roboto Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    cursor: pointer;
 }
 
 .footer {
