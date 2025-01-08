@@ -126,6 +126,9 @@ input[type="email"]:focus, input[type="password"]:focus {
 
 .container-btn-cadastro {
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-cadastro {
