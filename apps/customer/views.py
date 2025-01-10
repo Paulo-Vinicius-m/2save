@@ -13,9 +13,13 @@ def home(request: HttpRequest) -> HttpResponse:
 
         #all_objects = [*Restaurante.objects.all(), *User.objects.all()]
         name = request.GET.get('name', default='')
-        restaurantes = serialize(
-            format='json', 
-            queryset=Restaurante.objects.filter(username__icontains=name)
+        restaurantes = serialize('json', Restaurante.objects,
+            'username',
+            'cnpj',
+            'email',
+            'telefone',
+            'logo',
+            
         )
         
         return JsonResponse(
