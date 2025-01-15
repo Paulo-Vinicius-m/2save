@@ -16,7 +16,7 @@ function mudaTitulo(event) {
 
 }
 
-
+// evento de ao carregar a página vai deixar selecionado já um botão e um texto
 document.addEventListener('DOMContentLoaded', () => {
     const botaoSelecionado = document.querySelector('.custom-btn.selecionado');
     const textoInicial = botaoSelecionado.getAttribute('data-texto');
@@ -29,3 +29,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// função que muda as seções ao clicar no botão
+function mudarSecoes() {
+    const botoes = document.querySelectorAll('.custom-btn');
+    const secoes = document.querySelectorAll('.secao-container');
+
+    // Define uma seção inicial ao carregar a página
+    document.getElementById('secao1').classList.add('active');
+
+    // Adiciona evento de clique para cada botão
+    botoes.forEach(botao => {
+        botao.addEventListener('click', () => {
+            const botaoClicado = botao.getAttribute('data-target');
+
+            // esconde todas as secoes 
+            secoes.forEach(secao => {
+                secao.classList.remove('active');
+            });
+
+            // mostra a secao clicada
+            const secaoAtiva = document.getElementById(botaoClicado);
+            secaoAtiva.classList.add('active');
+
+        });
+    });
+}
+
+mudarSecoes();
+
+// Conteúdo das secoes 
+function conteudoSecoes() {
+    
+}

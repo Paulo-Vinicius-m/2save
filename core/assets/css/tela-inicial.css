@@ -86,8 +86,6 @@ main {
     border: none;
 }
 
-
-
 .selecionado {
     color: #FFFFFF;
     background: #805A40;
@@ -110,4 +108,14 @@ main {
     color: #000000;
     margin-top: 200px;
     margin-left: 230px;
+    margin: 200px 230px 95px;
 }
+
+/* Seção dos cards */
+.secao-container {
+    display: none;
+}
+
+.secao-container.active {
+    display: block;
+  }
