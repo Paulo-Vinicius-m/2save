@@ -11,44 +11,49 @@
 </head>
 <body>
 
-    <header class="header">
-        <nav class="navbar bg-body-tertiary">
-            <div class="container">
-              <a href="tela-inicial.html">
-                <img src="/assets/img/header/retangulo.png" alt="Retangulo">
-              </a>
-              <div>
-                <a class="navbar-brand" href="#">
-                    <img src="/assets/img/header/icon-busca.png" alt="Retangulo">
-                  </a>
-                  <a class="navbar-brand" href="#">
-                    <img src="/assets/img/header/icon-perfil.png" alt="Retangulo">
-                  </a>
-                  <a class="navbar-brand" href="#">
-                    <img src="/assets/img/header/icon-carrinho.png" alt="Retangulo">
-                  </a>
-              </div>
-            </div>
-          </nav>
-    </header>
-
-    <main>
-        <div class="bg-imagem"></div>
-
-        <section class="container-btn">
+  <header class="header">
+      <nav class="navbar bg-body-tertiary">
+          <div class="container">
+            <a href="/inicio">
+              <img src="/assets/img/header/retangulo.png" alt="Retangulo">
+            </a>
             <div>
-                <button type="button" class="custom-btn">Restaurantes</button>
-                <button type="button" class="custom-btn">Bebidas</button>
-                <button type="button" class="custom-btn">Refeições</button>
+              <a class="navbar-brand" href="#">
+                  <img src="/assets/img/header/icon-busca.png" alt="Retangulo">
+                </a>
+                <a class="navbar-brand" href="#">
+                  <img src="/assets/img/header/icon-perfil.png" alt="Retangulo">
+                </a>
+                <a class="navbar-brand" href="#">
+                  <img src="/assets/img/header/icon-carrinho.png" alt="Retangulo">
+                </a>
             </div>
+          </div>
+        </nav>
+  </header>
 
-        </section>
+  <main>
+    <div class="bg-imagem"></div>
 
-    </main>
+    <section class="container-btn">
+        <div>
+            <button type="button" id="btnRestaurante" class="custom-btn selecionado" data-texto="Restaurantes">Restaurantes</button>
+            <button type="button" id="btnBebidas" class="custom-btn" data-texto="Bebidas">Bebidas</button>
+            <button type="button" id="btnRefeicoes" class="custom-btn" data-texto="Refeições">Refeições</button>
+        </div>
+    </section>
+
+    <h2 class="titulo" id="titulo"></h2>
+
+
+  </main>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <script src="/assets/js/tela-inicial.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
 </body>
 </html>

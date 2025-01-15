@@ -24,7 +24,7 @@ async function login(event) {
 
             localStorage.setItem("authToken", result.token);
 
-            window.location.href = "/register";
+            window.location.href = "/inicio";
 
         } else {
             alert(`Erro no login: ${result.message || "Email ou senha inválidos."}`);
