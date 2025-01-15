@@ -1,0 +1,48 @@
+{
+    "restaurantes": [
+        {
+            "id": 1,
+            "nome": "Restaurante 1",
+            "descricao": "Lanche",
+            "imagem": "/assets/img/tela-inicial/restaurante.png"
+        }, 
+        {
+            "id": 2,
+            "nome": "Restaurante 2",
+            "descricao": "Lanche",
+            "imagem": "/assets/img/tela-inicial/restaurante.png"
+        }
+    ], 
+    "bebidas": [
+        {
+            "id": 1,
+            "nome": "Bebida 1",
+            "descricao": "Bebida",
+            "valor": "R$ 30,00",
+            "imagem": "/assets/img/tela-inicial/bebida.png"
+        },
+        {
+            "id": 2,
+            "nome": "Bebida 2",
+            "descricao": "Bebida",
+            "valor": "R$ 30,00",
+            "imagem": "/assets/img/tela-inicial/bebida.png"
+        }
+    ],
+    "refeicoes": [
+        {
+            "id": 1,
+            "nome": "Nome da refeição 1",
+            "descricao": "Bebida",
+            "valor": "R$ 50,00",
+            "imagem": "/assets/img/tela-inicial/refeicoes.png"
+        },
+        {
+            "id": 2,
+            "nome": "Nome da refeição 2",
+            "descricao": "Bebida",
+            "valor": "R$ 50,00",
+            "imagem": "/assets/img/tela-inicial/refeicoes.png"
+        }
+    ]
+}
