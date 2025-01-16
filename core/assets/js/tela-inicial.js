@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.addEventListener('click', mudaTitulo);
     });
 
+    carregarDados();
+    mudarSecoes(); 
+
 });
 
 // função que muda as seções ao clicar no botão
@@ -55,9 +58,36 @@ function mudarSecoes() {
     });
 }
 
-mudarSecoes();
+async function carregarDados() {
+    try {
+        const response = await fetch('assets/js/tela-inicial.json');
+        const dados = await response.json();
 
-// Conteúdo das secoes 
-function conteudoSecoes() {
-    
+        const secoes = {
+            restaurantes: document.getElementById('secao1'),
+            bebidas: document.getElementById('secao2'),
+            refeicoes: document.getElementById('secao3')
+        };
+
+        for (const [categoria, items] of Object.entries(dados)) {
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-custom';
+                card.innerHTML = `
+                    <div class="container-imagem">
+                        <img src="${item.imagem}" alt="Imagem ${categoria}">
+                    </div>
+                    <div class="container-informacoes">
+                        <h2>${item.nome}</h2>
+                        <p>${item.descricao}</p>
+                        ${item.preco ? `<p>${item.preco}</p>` : ''}
+                    </div>
+                `;
+                secoes[categoria].appendChild(card);
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+    }
 }
+

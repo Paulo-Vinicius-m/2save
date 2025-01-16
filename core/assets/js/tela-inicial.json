@@ -1,48 +1,50 @@
 {
     "restaurantes": [
-        {
-            "id": 1,
-            "nome": "Restaurante 1",
-            "descricao": "Lanche",
-            "imagem": "/assets/img/tela-inicial/restaurante.png"
-        }, 
-        {
-            "id": 2,
-            "nome": "Restaurante 2",
-            "descricao": "Lanche",
-            "imagem": "/assets/img/tela-inicial/restaurante.png"
-        }
-    ], 
+      {
+        "imagem": "assets/img/tela-inicial/restaurante.png",
+        "nome": "Subway",
+        "descricao": "Lanches"
+      },
+      {
+        "imagem": "assets/img/tela-inicial/restaurante.png",
+        "nome": "McDonald's",
+        "descricao": "Fast Food"
+      }
+    ],
     "bebidas": [
-        {
-            "id": 1,
-            "nome": "Bebida 1",
-            "descricao": "Bebida",
-            "valor": "R$ 30,00",
-            "imagem": "/assets/img/tela-inicial/bebida.png"
-        },
-        {
-            "id": 2,
-            "nome": "Bebida 2",
-            "descricao": "Bebida",
-            "valor": "R$ 30,00",
-            "imagem": "/assets/img/tela-inicial/bebida.png"
-        }
+      {
+        "imagem": "assets/img/tela-inicial/bebida.png",
+        "nome": "Coca-Cola",
+        "descricao": "Refrigerante",
+        "preco": "R$5,00"
+      },
+      {
+        "imagem": "assets/img/tela-inicial/bebida.png",
+        "nome": "Suco Natural",
+        "descricao": "Suco de frutas",
+        "preco": "R$7,00"
+      }
     ],
     "refeicoes": [
-        {
-            "id": 1,
-            "nome": "Nome da refeição 1",
-            "descricao": "Bebida",
-            "valor": "R$ 50,00",
-            "imagem": "/assets/img/tela-inicial/refeicoes.png"
-        },
-        {
-            "id": 2,
-            "nome": "Nome da refeição 2",
-            "descricao": "Bebida",
-            "valor": "R$ 50,00",
-            "imagem": "/assets/img/tela-inicial/refeicoes.png"
-        }
+      {
+        "imagem": "assets/img/tela-inicial/refeicoes.png",
+        "nome": "Lasanha",
+        "descricao": "Serve 2 pessoas",
+        "preco": "R$50,00"
+      },
+      {
+        "imagem": "assets/img/tela-inicial/refeicoes.png",
+        "nome": "Churrasco",
+        "descricao": "Serve 4 pessoas",
+        "preco": "R$120,00"
+      },
+      {
+        "imagem": "assets/img/tela-inicial/refeicoes.png",
+        "nome": "Churrasco",
+        "descricao": "Serve 4 pessoas",
+        "preco": "R$120,00"
+      }
+      
     ]
-}
+  }
+  
