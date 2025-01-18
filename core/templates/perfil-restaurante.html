@@ -4,10 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Restaurante</title>
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/perfil-restaurante.css">
 
-    <link rel="shortcut icon" href="assets/img/Appetit-logo.jpg" type="image/x-icon">
+
 </head>
 <body>
+  <div class="main_container">
+    <nav class="navbar navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <img src="/assets/img/header/retangulo.png"  class="logo-top" alt="">
+      <div class="container-imgs">
+        <div class="container-icon">
+          <img src="/assets/img/header/icon-busca.png" alt="Ícone de Busca">
+        </div>
+        <div class="container-person">
+          <img src="/assets/img/header/icon-perfil.png" alt="Ícone de Perfil">
+        </div>
+      </div>
+    </nav>
+  
+    <div class="menu" id="navbarMenu">
+      <ul>
+        <li>
+          <img src="/assets/img/menu/perfil.png" alt="Painel"/>
+          <a href="#">Painel</a>
+        </li>
+        <li>
+          <img src="/assets/img/menu/menu.png" alt="Cardápio" />
+          <a href="#">Cardápio</a>
+        </li>
+        <li>
+          <img src="/assets/img/menu/pedido.png" alt="Pedidos" />
+          <a href="#">Pedidos</a>
+        </li>
+        <li>
+          <img src="/assets/img/menu/logout.png" alt="Sair" />
+          <a href="#">Sair</a>
+        </li>
+      </ul>
+    </div>
+  
     
+    <div class="container-info">
+      <div class="container-img-comerciante">
+        <img id="user-image" alt="Imagem do comerciante">
+      </div>
+      <div class="profile-info">
+        <div class="info-column">
+          <div class="info-title">Dados Pessoais</div>
+          <div class="info-row">
+            <span class="info-label">Nome completo:</span>
+            <span id="user-name" class="info-value"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email:</span>
+            <span id="user-email" class="info-value"></span>
+          </div>
+        </div>
+        <div class="info-column">
+          <div>&nbsp;</div> <!-- Para manter o espaço do título alinhado -->
+          <div class="info-row right">
+            <span class="info-label">CPF:</span>
+            <span id="user-cpf" class="info-value"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Nome da empresa:</span>
+            <span id="user-company" class="info-value"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer></footer>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="/assets/js/perfil-restaurante.js"></script>
 </body>
+
+
 </html>

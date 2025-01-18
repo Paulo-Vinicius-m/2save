@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex; /* Habilita o flexbox */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+  border-radius: 0; /* Remove as bordas arredondadas */
+  margin: 0 auto;
+  background-color: #ffffff;
+  height: 70px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-toggler {
+  width: 50px; 
+  height: 44px; /* Altura do botão */
+  position: absolute; /* Coloca o botão fora do fluxo de layout */
+  left: 142px; /* Distância da esquerda */
+}
+
+.menu {
+    width: 25%;
+    height: 830px;
+    gap: 0px;
+    background: #F4F4F4E5;
+    box-shadow: 4px 4px 4px 2px #0000001A;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    position: absolute; /* Alterado para ficar em relação ao container */
+    left: 0;
+    top: 70px; /* Deve coincidir com a altura do navbar */
+    z-index: 1000; /* Garante que o menu fique acima do conteúdo */
+    padding-top: 80px;
+    padding-left: 10%;
+}
+
+.menu.show {
+    opacity: 1;
+    pointer-events: auto; /* Permite interação quando visível */
+}
+
+
+.menu ul li {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    gap: 10px; /* Espaçamento entre a imagem e o texto */
+    margin-bottom: 20px; /* Espaço extra entre os itens, se necessário */
+}
+
+.menu ul li img {
+    width: 24px; /* Ajuste o tamanho da imagem, se necessário */
+    height: 24px; /* Ajuste o tamanho da imagem, se necessário */
+    object-fit: contain; /* Garante que a imagem seja exibida corretamente */
+}
+
+.menu ul li a {
+    font-size: 20px; /* Tamanho da fonte, ajuste conforme necessário */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    line-height: 30px;
+    color: #000; /* Define a cor do texto */
+}
+
+
+.logo-top {
+  width: 121px;
+  height: 47px;
+  opacity: 1; /* Certifique-se de que a imagem será visível */
+}
+.container-imgs {
+  position: absolute;
+  width: 65px;
+  height: 30px;
+  top: 25px;
+  left: 1188px;
+  display: flex;
+  gap: 0;
+}
+
+.container-imgs div img{
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  top: 0;
+  opacity: 1; /* Alterado para visível */
+}
+
+.container-imgs .container-icon img:first-child {
+  border-radius: 2px;
+  background: #FC80194D;
+  left: 0; /* Primeira imagem na posição da esquerda */
+}
+
+.container-imgs .container-person img:last-child {
+  border-radius: 2px;
+  background: #FC80194D;
+  left: 35px; /* Segunda imagem 30px à direita da primeira */
+}
+
+.container-info {
+  display: flex;
+  flex-direction: column; /* Empilha verticalmente os itens da imagem e do texto */
+  align-items: center; /* Centraliza a imagem e o bloco */
+  margin-top: 5%;
+}
+
+.container-img-comerciante img {
+  width: 150px; /* Tamanho da imagem */
+  height: 150px;
+  border-radius: 10%; /* Imagem redonda */
+  object-fit: cover;
+  margin-bottom: 20px; /* Espaço entre a imagem e o texto */
+}
+
+.profile-info {
+  display: flex;
+  justify-content: flex-start; /* Alinha os textos à esquerda */
+  gap: 230px; /* Espaço entre as duas colunas */
+}
+
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaço entre os itens dentro de cada coluna */
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.info-row.right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 29px;
+}
+
+.info-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px; /* Define o espaçamento entre o título e os textos abaixo */
+}
+.column-right {
+  margin-top: 28px;
+}
+.info-label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: normal;
+  color: #000;
+}
+
+footer {
+  position: absolute;
+  height: 70px;
+  width: 100%;
+  top: 900px;/*Posição na tela */
+  background-color: #FF6900; 
+}
+
+
+
+
+
+
+
+
