@@ -24,7 +24,7 @@
         <section class="container-pagamento">
 
             <!-- lado esquerdo da tela de pagamento -->
-            <section>
+            <section class="container-lado-esquerdo">
 
                 <section class="container-titulo-endereco">
                     <div class="icon-localizacao">
@@ -39,18 +39,19 @@
                         <img src="assets/img/pagamento/icon-localizacao-branco.png" alt="Icone de localização">
                     </div>
 
-                    <p>Rua Aeroporto de tiktok, 015 - Cep 152-333</p>
-                    <p>Candelária, Natal/ RN</p>
+                    <p class="endereco-rua">Rua Aeroporto de tiktok, 015 - Cep 152-333</p>
+                    <p class="endereco-cidade">Candelária, Natal/ RN</p>
                 </section>
 
+                <!-- seção container dos itens pedidos-->
                 <section class="container-carrinho">
                     <div class="carrinho">
-                        <div>
+                        <div class="icon-carrinho">
                             <img src="assets/img/pagamento/icon-carrinho.png" alt="Icone de Carrinho">
+                            <h3 class="carrinho-titulo">Carrinho</h3>
                         </div>
 
-                        <h3>Carrinho</h3>
-                        <h3>Itens</h3>
+                        <h3 class="carrinho-itens">3 Itens</h3>
                     </div>
 
                     <div class="container-itens">
@@ -70,7 +71,7 @@
 
                         <div class="item">
                             <div class="dados-item">
-                                <p class="nome-item">Assinha de frango - Bari Palesi</p>
+                                <p class="nome-item">Refrigerante Sprite 250ml - Bari Palesi</p>
                                 <p class="valor-item">R$ 50,00</p>
                             </div>
 
@@ -90,31 +91,27 @@
 
                 </section>
 
-                <!-- Area de Pagamento -->
-                <section class="container-pagamento">
-                    <div>
+                <!-- seção metodo de Pagamento -->
+                <section class="container-metodo-pagamento">
+                    <div class="metodo-pagamento">
                         <div class="icon-dinheiro">
-                            <img src="assets/img/pagamento/icon-localizacao.png" alt="Icone de Dinheiro">
+                            <img src="assets/img/pagamento/icon-dinheiro.png" alt="Icone de Dinheiro">
                         </div>
                         
-                        <h2 class="metodos-pagamentos">Método de pagamento</h2>
+                        <h2 class="titulo-metodos-pagamentos">Método de pagamento</h2>
                     </div>
 
-                    <form method="post" action="">
+                    <form method="post" action="" class="form-metodo-pagamento">
                         <div class="metodo-pix">
                             <input type="radio" name="pagamento" id="pix" value="pix">
-                            <label for="pix">
-                                <img src="assets/img/pagamento/icon-pix.png" alt="Icone PIX">
-                                PIX
-                            </label>
+                            <img src="assets/img/pagamento/icon-pix.png" class="icon-pix" alt="Icone PIX" >
+                            <label for="pix">PIX</label>
                         </div>
 
                         <div class="metodo-dinheiro">
                             <input type="radio" name="pagamento" id="dinheiro" value="dinheiro">
-                            <label for="dinheiro">
-                                <img src="assets/img/pagamento/icon-dinheiro.png" alt="Icone-dinheiro">
-                                Dinheiro
-                            </label>
+                            <img src="assets/img/pagamento/icon-cartao.png" class="icon-cartao" alt="Icone-dinheiro">
+                            <label for="dinheiro">Cartão de crédito</label>
                         </div>
 
                     </form>
@@ -123,7 +120,7 @@
             </section>
 
             <!-- lado direito da tela pagamento -->
-            <section>
+            <section class="container-lado-direito">
 
                 <div class="container-titulo">
                     <h2>Carrinho</h2>
@@ -156,8 +153,7 @@
                     <h3 class="titulo-detalhes">Detalhes da compra</h3>
 
                     <div class="detalhes-itens">
-
-                        <div class="detalhes-total">
+                        <div class="detalhes">
                             <p>Total dos itens</p>
                             <span>R$ 64,00</span>
                         </div>
@@ -174,7 +170,7 @@
                     </div>
                 </div>
 
-                <input type="button" value="Pagamento" id="pagamento" class="pagamento">
+                <input type="button" value="Pagamento" id="pagamento" class="btn-pagamento">
 
             </section>
 

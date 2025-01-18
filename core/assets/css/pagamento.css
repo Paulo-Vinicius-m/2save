@@ -15,6 +15,7 @@ header {
 main {
     background: linear-gradient(97.45deg, #F0F0F0 83.84%, #DCDCDC 108.05%);
     box-sizing: border-box;
+    padding-bottom: 1px;
 }
 
 .titulo-pagamento {
@@ -34,9 +35,332 @@ main {
     margin-top: -45px;
 }
 
-.rodape {
-    max-width: 1440px;
-    width: 100%;
-    height: 70px;
-    background-color: #D46D24;
+/* seção container pagamento */
+.container-pagamento {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
+
+/* lado esquerdo da tela de pagamentos */
+.container-titulo-endereco {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-localizacao {
+    width: 24.5px;
+    height: 33.41px;
+}
+
+.icon-localizacao img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-entrega {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+/* seção endereço */
+.container-endereco {
+    background-color: #FF6A00;
+    border-radius: 10px;
+    margin-top: 38px;
+    margin-bottom: 60px;
+    padding-top: 17px;
+    padding-bottom: 20px;
+    width: 350px;
+}
+
+.icon-localizacao-branco {
+    width: 20px;
+    height: 30px;
+    margin: 0px 8px 8px 28px;
+}
+
+.icon-localizacao-branco img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-endereco .endereco-rua, .container-endereco .endereco-cidade {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+    margin: 5px 25px;
+}
+
+/* seção itens de pedidos */
+.carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 37px;
+}
+
+.icon-carrinho {
+    display: flex;
+    align-items: center;
+    width: 32px;
+    height: 34px;
+    gap: 10px;
+}
+
+.icon-carrinho img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carrinho-titulo, .carrinho-itens {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.carrinho-itens {
+    margin-right: 20px;
+}
+
+/* lista de itens do carrinho */
+.item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #FFFFFF;
+    margin-bottom: 25px;
+}
+
+.nome-item, .valor-item {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.valor-item {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.numero-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 100px;
+}
+
+.btn-menos, .btn-mais {
+    border: none;
+}
+
+.container-total {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nome, .valor-total {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.valor-total {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    margin-right: 20px;
+}
+
+/* seção metodo de Pagamento */
+.container-metodo-pagamento {
+    margin-top: 45px;
+}
+
+.metodo-pagamento {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.icon-dinheiro {
+    width: 33px;
+    height: 34px;
+}
+
+.icon-dinheiro img {
+    width: 100%;
+    height: 100%;
+}
+
+.titulo-metodos-pagamentos {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.form-metodo-pagamento label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.metodo-pix {
+    margin-bottom: 5px;
+}
+
+.metodo-pix, .metodo-dinheiro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-pix {
+    width: 31px;
+    height: 21px;
+    background-color: #3CE789;
+    border-radius: 2px;
+}
+
+.icon-cartao {
+    width: 31px;
+    height: 33px;
+}
+
+/* lado direito tela de pagamentos */
+.container-lado-direito {
+    background-color: #D9D9D9;
+    height: 100%;
+}
+
+.container-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 17px 30px 17px;
+}
+
+.container-titulo h2, .container-titulo h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.container-titulo h3 {
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.itens-pedidos {
+    margin: 0 17px 40px 17px;
+}
+
+.item-pedido {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.quantidade-item {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+    margin-left: 50px;
+    margin-right: 30px;
+}
+
+.container-detalhes-compra {
+    margin-left: 17px;
+}
+
+.titulo-detalhes {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    color: #000000;
+    margin-bottom: 19px;
+}
+
+.detalhes, .detalhes-frete, .detalhes-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 15px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.detalhes span, .detalhes-frete span, .detalhes-total span {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.detalhes-total {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.btn-pagamento {
+    width: 114px;
+    height: 29px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+    background: #FF6A00;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+
