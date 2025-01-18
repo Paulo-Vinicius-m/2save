@@ -1,6 +1,11 @@
 /db.sqlite3
 /venv
+/media
 **/migrations/**
 *.log
 *.pot
 *.pyc
+settings/__pycache__/__init__.cpython-312.pyc
+settings/__pycache__/__init__.cpython-312.pyc
+settings/__pycache__/urls.cpython-312.pyc
+settings/__pycache__/wsgi.cpython-312.pyc
