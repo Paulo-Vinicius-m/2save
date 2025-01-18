@@ -20,9 +20,168 @@
 
         <hr class="linha">
 
+        
+        <section class="container-pagamento">
+
+            <!-- lado esquerdo da tela de pagamento -->
+            <section>
+
+                <section class="container-titulo-endereco">
+                    <div class="icon-localizacao">
+                        <img src="assets/img/pagamento/icon-localizacao.png" alt="Icone de localização">
+                    </div>
+                    
+                    <h2 class="titulo-entrega">Endereço de entrega</h2>
+                </section>
+
+                <section class="container-endereco">
+                    <div class="icon-localizacao-branco">
+                        <img src="assets/img/pagamento/icon-localizacao-branco.png" alt="Icone de localização">
+                    </div>
+
+                    <p>Rua Aeroporto de tiktok, 015 - Cep 152-333</p>
+                    <p>Candelária, Natal/ RN</p>
+                </section>
+
+                <section class="container-carrinho">
+                    <div class="carrinho">
+                        <div>
+                            <img src="assets/img/pagamento/icon-carrinho.png" alt="Icone de Carrinho">
+                        </div>
+
+                        <h3>Carrinho</h3>
+                        <h3>Itens</h3>
+                    </div>
+
+                    <div class="container-itens">
+
+                        <div class="item">
+                            <div class="dados-item">
+                                <p class="nome-item">Assinha de frango - Bari Palesi</p>
+                                <p class="valor-item">R$ 50,00</p>
+                            </div>
+
+                            <div class="numero-item">
+                                <button class="btn-menos">-</button>
+                                <p class="quantidade-item">1</p>
+                                <button class="btn-mais">+</button>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="dados-item">
+                                <p class="nome-item">Assinha de frango - Bari Palesi</p>
+                                <p class="valor-item">R$ 50,00</p>
+                            </div>
+
+                            <div class="numero-item">
+                                <button class="btn-menos">-</button>
+                                <p class="quantidade-item">1</p>
+                                <button class="btn-mais">+</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-total">
+                        <h3 class="nome">Subtotal</h3>
+                        <h3 class="valor-total">R$ 64,00</h3>
+                    </div>
+
+                </section>
+
+                <!-- Area de Pagamento -->
+                <section class="container-pagamento">
+                    <div>
+                        <div class="icon-dinheiro">
+                            <img src="assets/img/pagamento/icon-localizacao.png" alt="Icone de Dinheiro">
+                        </div>
+                        
+                        <h2 class="metodos-pagamentos">Método de pagamento</h2>
+                    </div>
+
+                    <form method="post" action="">
+                        <div class="metodo-pix">
+                            <input type="radio" name="pagamento" id="pix" value="pix">
+                            <label for="pix">
+                                <img src="assets/img/pagamento/icon-pix.png" alt="Icone PIX">
+                                PIX
+                            </label>
+                        </div>
+
+                        <div class="metodo-dinheiro">
+                            <input type="radio" name="pagamento" id="dinheiro" value="dinheiro">
+                            <label for="dinheiro">
+                                <img src="assets/img/pagamento/icon-dinheiro.png" alt="Icone-dinheiro">
+                                Dinheiro
+                            </label>
+                        </div>
+
+                    </form>
+                </section>
+
+            </section>
+
+            <!-- lado direito da tela pagamento -->
+            <section>
+
+                <div class="container-titulo">
+                    <h2>Carrinho</h2>
+                    <h3>3 itens</h3>
+                </div>
+
+                <div class="itens-pedidos">
+
+                    <div class="item-pedido">
+                        <div>
+                            <h3 class="nome-item">Assinha de frango - Bari Palesi</h3>
+                            <p class="valor-item">R$ 50,00</p>
+                        </div>
+                        
+                        <p class="quantidade-item">1</p>
+                    </div>
+
+                    <div class="item-pedido">
+                        <div>
+                            <h3 class="nome-item">Refrigerante Sprite 250ml - Bari Palesi</h3>
+                            <p class="valor-item">R$ 7,00</p>
+                        </div>
+                        
+                        <p class="quantidade-item">1</p>
+                    </div>
+                    
+                </div>
+
+                <div class="container-detalhes-compra">
+                    <h3 class="titulo-detalhes">Detalhes da compra</h3>
+
+                    <div class="detalhes-itens">
+
+                        <div class="detalhes-total">
+                            <p>Total dos itens</p>
+                            <span>R$ 64,00</span>
+                        </div>
+
+                        <div class="detalhes-frete">
+                            <p>Taxa do frete</p>
+                            <span>R$ 2,00</span>
+                        </div>
+
+                        <div class="detalhes-total">
+                            <p>Total da compra</p>
+                            <span>R$ 66,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="button" value="Pagamento" id="pagamento" class="pagamento">
+
+            </section>
+
+        </section>
+
     </main>
 
-    <footer class="rodape"></footer>
     
 </body>
 </html>

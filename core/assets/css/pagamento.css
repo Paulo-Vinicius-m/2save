@@ -15,7 +15,6 @@ header {
 main {
     background: linear-gradient(97.45deg, #F0F0F0 83.84%, #DCDCDC 108.05%);
     box-sizing: border-box;
-    height: 100%;
 }
 
 .titulo-pagamento {
