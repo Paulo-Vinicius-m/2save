@@ -28,13 +28,68 @@
                 <a class="navbar-brand" href="#">
                   <img src="/assets/img/header/icon-perfil.png" alt="Retangulo">
                 </a>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#" id="icon-carrinho">
                   <img src="/assets/img/header/icon-carrinho.png" alt="Retangulo">
                 </a>
             </div>
           </div>
         </nav>
   </header>
+
+  <!-- Modal Carrinho-->
+  <div class="modal-carrinho" id="modal-carrinho">
+
+    <!-- seção container dos itens pedidos-->
+    <section class="container-carrinho">
+      <div class="icon-fechar-modal" id="icon-fechar-modal">
+        <img src="assets/img/icon-fechar-modal.png" alt="Icone Fechar Modal">
+      </div>
+
+      <div class="carrinho">
+        <h3 class="carrinho-titulo">Carrinho</h3>
+        <h3 class="carrinho-itens">3 Itens</h3>
+      </div>
+
+      <div class="container-itens">
+
+        <div class="item">
+          <div class="dados-item">
+            <p class="nome-item">Assinha de frango - Bari Palesi</p>
+            <p class="valor-item">R$ 50,00</p>
+          </div>
+
+          <div class="numero-item">
+            <button class="btn-menos">-</button>
+            <p class="quantidade-item">1</p>
+            <button class="btn-mais">+</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="dados-item">
+            <p class="nome-item">Refrigerante Sprite 250ml - Bari Palesi</p>
+            <p class="valor-item">R$ 50,00</p>
+          </div>
+
+          <div class="numero-item">
+            <button class="btn-menos">-</button>
+            <p class="quantidade-item">1</p>
+            <button class="btn-mais">+</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container-total">
+        <h3 class="nome">Subtotal</h3>
+        <h3 class="valor-total">R$ 64,00</h3>
+      </div>
+
+      <input type="button" value="Finalizar Compra" id="pagamento" class="btn-pagamento">
+
+    </section>
+    
+  </div>
 
   <main>
     <div class="bg-imagem"></div>
@@ -60,6 +115,7 @@
   <footer class="rodape"></footer>
 
   <script src="/assets/js/tela-inicial.js"></script>
+  <script src="/assets/js/modal-carrinho.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
