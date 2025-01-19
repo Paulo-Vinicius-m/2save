@@ -5,7 +5,7 @@ https://www.figma.com/design/AndxMt8yxIANqOHPPgoIdm/Appetit?node-id=24-370&t=1IA
 Os pontos protegidos só podem ser acessados se o token de acesso for passado no header da requisição.
 
 ## /api/users/register
-Só aceita **POST**. O request body deve conter (dentro dos parêntesis estão os nomes das keys do formulário):
+Só aceita **POST**. O request body deve conter (dentro dos parênteses estão os nomes das keys do formulário):
 - Username (name)
 - Email (email)
 - Confirmação do email (email2)
