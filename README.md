@@ -27,6 +27,128 @@ Só aceita **GET**. O body deve conter o nome do restaurante que deseja pesquisa
 
 Retorna um json com os restaurantes que se encaixam na pesquisa.
 
+Paulo-Vinicius-m: Gere uma documentação do endpoint /api/alterar-cardapio (definida pela classe view_produtos) para que os desenvolvedores front end saibam utilizá-lo
+
+Workspace: Collecting workspace information
+
+### Documentação do Endpoint `/api/alterar-cardapio`
+
+#### Descrição
+Este endpoint permite que restaurantes criem, atualizem e deletem produtos do cardápio.
+
+#### URL
+`/api/alterar-cardapio`
+
+#### Métodos HTTP
+- 
+
+POST
+
+
+- `PUT`
+- `DELETE`
+
+#### Autenticação
+Este endpoint requer autenticação com permissão de 'restaurant'. O token de autenticação deve ser enviado no cabeçalho da requisição.
+
+#### Exemplo de Cabeçalho de Autenticação
+```http
+Authorization: Bearer <seu_token_aqui>
+```
+
+### 
+
+POST /api/alterar-cardapio
+
+
+#### Descrição
+Cria um novo produto associado a um restaurante.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "nome": "Nome do produto",
+    "descricao": "Descrição do produto",
+    "preco": "Preço do produto",
+    "imagem": "URL da imagem do produto",
+    "tipo": "Tipo do produto"
+}
+```
+
+#### Respostas
+- `201 Created`: Retorna os dados do produto criado em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": 1,
+    "nome": "Nome do produto",
+    "descricao": "Descrição do produto",
+    "preco": "Preço do produto",
+    "imagem": "URL da imagem do produto",
+    "tipo": "Tipo do produto",
+    "restaurante": "ID do restaurante"
+}
+```
+
+### `PUT /api/alterar-cardapio`
+#### Descrição
+Atualiza um produto existente.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "id": "ID do produto",
+    "nome": "Nome do produto",
+    "descricao": "Descrição do produto",
+    "preco": "Preço do produto",
+    "imagem": "URL da imagem do produto",
+    "tipo": "Tipo do produto"
+}
+```
+
+#### Respostas
+- `200 OK`: Retorna os dados do produto atualizado em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": 1,
+    "nome": "Nome do produto",
+    "descricao": "Descrição do produto",
+    "preco": "Preço do produto",
+    "imagem": "URL da imagem do produto",
+    "tipo": "Tipo do produto",
+    "restaurante": "ID do restaurante"
+}
+```
+
+### `DELETE /api/alterar-cardapio`
+#### Descrição
+Deleta um produto existente.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "id": "ID do produto"
+}
+```
+
+#### Respostas
+- `200 OK`: Confirma que o produto foi deletado.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta
+```
+200 OK
+Produto deletado
+```
+
 # Para rodar o projeto
 abra o terminal e rode os seguintes comendos:
 

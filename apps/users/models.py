@@ -53,19 +53,21 @@ class Produto(models.Model):
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=10, choices=[('prato', 'Prato'), ('bebida', 'Bebida')], default='prato')
     
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'tipo': self.tipo,
+            'nome': self.nome,
+            'descricao': self.descricao,
+            'preco': str(self.preco),
+            'imagem': self.imagem.url if self.imagem else None,
+        }
+
     def __str__(self):
         return self.nome
 
 def produto_serializer(produtos: models.QuerySet) -> dict:
-    return [
-        {
-            'nome': produto.nome,
-            'descricao': produto.descricao,
-            'preco': str(produto.preco),
-            'imagem': produto.imagem.url if produto.imagem else None,
-        }
-        for produto in produtos
-    ]
+    return [produto.to_dict() for produto in produtos]
 
 class Carrinho(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE, unique=True)
@@ -82,7 +84,7 @@ class Carrinho(models.Model):
     
     def save(self, *args, **kwargs):
 
-        if not self._state.adding:
+        if self.pk is not None:
             # Calcula o preço total do pedido
             self.preco = 0
             for produto in self.produtos.all():
@@ -125,8 +127,7 @@ class Pedido(models.Model):
         }
     
     def save(self, *args, **kwargs):
-
-        if not self._state.adding:
+        if self.pk is not None:
             # Calcula o preço total do pedido
             self.preco = 0
             for produto in self.produtos.all():
@@ -142,7 +143,7 @@ class Pedido(models.Model):
 
         super().save(*args, **kwargs)
 
-class Pedido_Produto(models.Model):
+'''class PedidoProduto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.IntegerField()
@@ -155,7 +156,4 @@ class Pedido_Produto(models.Model):
         verbose_name_plural = 'Pedidos Produtos'
     
     def save(self, *args, **kwargs):
-        if self.produto not in self.pedido.produtos.all():
-            raise ValueError('Produto não pertence ao pedido')
-        
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)'''

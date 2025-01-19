@@ -6,6 +6,7 @@ from django.forms.models import model_to_dict
 from users.utils import autorize
 from django.contrib.auth.models import User
 from django.views.generic import View
+import json
 
 # Create your views here.
 '''@autorize('customer or restaurant') 
@@ -85,7 +86,7 @@ class view_restaurantes(View):
 class view_pedidos(View):
 
     @autorize('customer')
-    def create(self, request: HttpRequest, **kwargs) -> HttpResponse:
+    def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Cria um pedido
 
         data = request.body.decode('utf-8')
@@ -140,4 +141,59 @@ class view_carrinho(View):
             data=carrinho.to_dict(),
             status=200,
             safe=False,
+        )
+
+# /api/alterar-cardapio/
+class view_produtos(View):
+    @autorize('restaurant')
+    def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Cria um produto
+
+        data = json.loads(request.body.decode('utf-8'))
+        restaurante = Restaurante.objects.get(id=kwargs['token']['sub'])
+        produto = Produto.objects.create(
+            nome=data.get('nome'),
+            descricao=data.get('descricao'),
+            preco=data.get('preco'),
+            imagem=data.get('imagem'),
+            tipo=data.get('tipo'),
+            restaurante=restaurante,
+        )
+        
+        return JsonResponse(
+            data=produto.to_dict(),
+            status=201,
+            safe=False,
+        )
+    
+    @autorize('restaurant')
+    def put(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Atualiza um produto
+
+        data = json.loads(request.body.decode('utf-8'))
+        produto = Produto.objects.get(restaurante = kwargs['token']['sub'], id=data.get('id'))
+        produto.nome = data.get('nome')
+        produto.descricao = data.get('descricao')
+        produto.preco = data.get('preco')
+        produto.imagem = data.get('imagem')
+        produto.tipo = data.get('tipo')
+        produto.save()
+        
+        return JsonResponse(
+            data=produto.to_dict(),
+            status=200,
+            safe=False,
+        )
+    
+    @autorize('restaurant')
+    def delete(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Deleta um produto
+
+        data = json.loads(request.body.decode('utf-8'))
+        produto = Produto.objects.get(restaurante = kwargs['token']['sub'], id=data.get('id'))
+        produto.delete()
+        
+        return HttpResponse(
+            content='Produto deletado',
+            status=200
         )

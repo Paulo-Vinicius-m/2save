@@ -139,10 +139,17 @@ class PedidoModelTest(TestCase):
             endereco='Rua A',
             numero='123'
         )
-        self.produto = Produto.objects.create(
+        self.produto1 = Produto.objects.create(
             nome='Produto1',
             descricao='Descricao do produto',
             preco=10.50,
+            restaurante=self.restaurante,
+            tipo='prato'
+        )
+        self.produto2 = Produto.objects.create(
+            nome='Produto2',
+            descricao='Descricao do produto',
+            preco=11.50,
             restaurante=self.restaurante,
             tipo='prato'
         )
@@ -150,7 +157,7 @@ class PedidoModelTest(TestCase):
             consumidor=self.consumidor,
             restaurante=self.restaurante
         )
-        self.pedido.produtos.add(self.produto)
+        self.pedido.produtos.add(self.produto1)
         self.pedido.save()
 
     def test_pedido_creation(self):
@@ -159,6 +166,17 @@ class PedidoModelTest(TestCase):
         self.assertEqual(self.pedido.produtos.count(), 1)
         self.assertEqual(self.pedido.preco, 10.50)
 
+    def test_pedido_add_new_produto(self):
+        self.pedido.produtos.add(self.produto2)
+        self.pedido.save()
+        self.assertEqual(self.pedido.produtos.count(), 2)
+        self.assertEqual(self.pedido.preco, 22.00, f'{[produto.preco for produto in self.pedido.produtos.all()]}')
+
+    def test_pedido_add_produto_again(self):
+        self.pedido.produtos.add(self.produto1)
+        self.pedido.save()
+        self.assertEqual(self.pedido.produtos.count(), 2)
+        self.assertEqual(self.pedido.preco, 21)
 
 '''class PedidoProdutoModelTest(TestCase):
     def setUp(self):
