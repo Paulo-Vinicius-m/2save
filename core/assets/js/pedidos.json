@@ -1,0 +1,17 @@
+{ 
+  "refeicoes": [{
+    "id": "126",
+    "imagem": "/assets/img/pedido/foto-pedido.png",
+    "produto": "Asinha de frango",
+    "valor": "55,00",
+    "endereco": "Av. Paulista, n° 34"
+  },
+  {
+    "id": "127",
+    "imagem": "/assets/img/pedido/foto-pedido.png",
+    "produto": "Asinha de frango",
+    "valor": "55,00",
+    "endereco": "Av. Paulista, n° 34"
+  }
+]  
+}

@@ -1,47 +1,3 @@
-// função para abrir o modal do carrinho
-function abrirModal() {
-
-    const modalCarrinho = document.getElementById('modal-carrinho');
-    
-    modalCarrinho.classList.add('ativo');
-
-    // Adicionar o evento ao botão "Finalizar Compra" quando o modal for aberto
-    const pagamento = document.getElementById('pagamento');
-    if (pagamento) {
-        pagamento.addEventListener('click', telaPagamento);
-    }
-
-}
-
-function fecharModal() {
-    const modalCarrinho = document.getElementById('modal-carrinho');
-
-    modalCarrinho.classList.remove('ativo');
-
-    // Remover o evento de clique no botão "Finalizar Compra" quando o modal for fechado
-    const pagamento = document.getElementById('pagamento');
-    if (pagamento) {
-        pagamento.removeEventListener('click', telaPagamento);
-    }
-}
-
-
-const iconCarrinho = document.getElementById('icon-carrinho');
-iconCarrinho.addEventListener('click', abrirModal);
-
-const iconFecharmModal = document.getElementById('icon-fechar-modal');
-iconFecharmModal.addEventListener('click', fecharModal);
-
-// Fechar o modal ao clicar fora dele
-document.addEventListener('click', function(event) {
-    const modalCarrinho = document.getElementById('modal-carrinho');
-    
-    // Verifica se o clique foi fora do modal
-    if (!modalCarrinho.contains(event.target) && event.target !== iconCarrinho) {
-        modalCarrinho.classList.remove('ativo'); // Fecha o modal
-    }
-});
-
 // função para atualizar os itens da lista do carrinho e exibir o total 
 document.addEventListener("DOMContentLoaded", () => {
     // Função para atualizar o total
@@ -95,9 +51,3 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar o total na carga da página
     atualizarTotal();
 });
-
-function telaPagamento() {
-    window.location.href = "/pagamento";
-}
-
-
