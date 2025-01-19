@@ -149,6 +149,135 @@ Deleta um produto existente.
 Produto deletado
 ```
 
+### Documentação do Endpoint `/api/carrinho`
+
+#### Descrição
+Este endpoint permite que os consumidores visualizem e modifiquem o carrinho de compras.
+
+#### URL
+`/api/carrinho`
+
+#### Métodos HTTP
+- `GET`
+- `POST`
+
+#### Autenticação
+Este endpoint requer autenticação com permissão de 'customer'. O token de autenticação deve estar no cookie "Authorization"
+
+### `GET /api/carrinho`
+#### Descrição
+Busca o carrinho de compras do consumidor autenticado.
+
+#### Respostas
+- `200 OK`: Retorna os dados do carrinho em formato JSON.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": 1,
+    "consumidor": "ID do consumidor",
+    "restaurante": null,
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Nome do produto",
+            "descricao": "Descrição do produto",
+            "preco": "Preço do produto",
+            "imagem": "URL da imagem do produto",
+            "tipo": "Tipo do produto"
+        },
+        ...
+    ]
+}
+```
+
+### `POST /api/carrinho`
+#### Descrição
+Adiciona um produto ao carrinho do consumidor autenticado.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "produtos": [
+        {
+            "id": "ID do produto",
+            "quantidade": 2
+        },
+        ...
+    ]
+}
+```
+P.S.: A função de quantidade ainda não foi implementada, por hora, o servidor ignora essa informação completamente
+
+#### Respostas
+- `200 OK`: Retorna os dados atualizados do carrinho em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": "ID do carrinho",
+    "consumidor": "ID do consumidor",
+    "restaurante": "ID do restaurante",
+    "produtos": [
+        {
+            "id": "ID do produto",
+            "nome": "Nome do produto",
+            "descricao": "Descrição do produto",
+            "preco": "Preço do produto",
+            "imagem": "URL da imagem do produto",
+            "tipo": "Tipo do produto"
+        },
+        ...
+    ]
+}
+```
+
+### `PUT /api/carrinho`
+#### Descrição
+Atualiza o carrinho do consumidor autenticado, substituindo os produtos existentes pelos novos produtos fornecidos.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "produtos": [
+        {
+            "id": "ID do produto",
+            "quantidade": 5
+        },
+        ...
+    ]
+}
+```
+
+#### Respostas
+- `200 OK`: Retorna os dados atualizados do carrinho em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": 1,
+    "consumidor": "ID do consumidor",
+    "restaurante": "ID do restaurante",
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Nome do produto",
+            "descricao": "Descrição do produto",
+            "preco": "Preço do produto",
+            "imagem": "URL da imagem do produto",
+            "tipo": "Tipo do produto"
+        },
+        ...
+    ]
+}
+```
+
+
 # Para rodar o projeto
 abra o terminal e rode os seguintes comendos:
 

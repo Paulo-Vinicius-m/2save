@@ -8,33 +8,6 @@ from django.contrib.auth.models import User
 from django.views.generic import View
 import json
 
-# Create your views here.
-'''@autorize('customer or restaurant') 
-def restaurantes(request: HttpRequest) -> HttpResponse:
-    if request.method == 'GET':
-        # Busca por nome de restaurante
-
-        name = request.GET.get('username', default='')
-        restaurantes = [
-            {
-                'username': restautante.username,
-                'cnpj': restautante.cnpj,
-                'email': restautante.email,
-                'telefone': restautante.telefone,
-                'logo': restautante.logo.url if restautante.logo else None,
-                'pratos': produto_serializer(Produto.objects.filter(restaurante=restautante, tipo='prato')),
-                'bebidas': produto_serializer(Produto.objects.filter(restaurante=restautante, tipo='bebida')),
-            }
-            for restautante in Restaurante.objects.filter(username__icontains=name)
-        ]
-        
-        return JsonResponse(
-            data=restaurantes,
-            status=200,
-            safe=False,
-        )
-
-    return HttpResponse(status=405)'''
 
 class view_restaurantes(View):
     @autorize()
@@ -111,7 +84,8 @@ class view_pedidos(View):
             status=200,
             safe=False,
         )
-    
+
+# /api/carrinho/  
 class view_carrinho(View):
     @autorize('customer')
     def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
@@ -129,13 +103,31 @@ class view_carrinho(View):
         )
     
     @autorize('customer')
+    def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Adiciona um produto ao carrinho
+
+        data = json.loads(request.body.decode('utf-8'))
+        carrinho = Carrinho.objects.get(consumidor__id=kwargs['token']['sub'])
+
+        for produto in data.get('produtos'):
+            carrinho.produtos.add(Produto.objects.get(pk=produto.get('id')))
+        
+        return JsonResponse(
+            data=carrinho.to_dict(),
+            status=201,
+            safe=False,
+        )
+    
+    @autorize('customer')
     def put(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Atualiza o carrinho
 
-        data = request.body.decode('utf-8')
+        data = json.loads(request.body.decode('utf-8'))
         carrinho = Carrinho.objects.get(consumidor__id=kwargs['token']['sub'])
-        produtos = Produto.objects.filter(id__in=data.get('produtos'))
-        carrinho.produtos.set(produtos, clear=True)
+
+        carrinho.produtos.clear()
+        for produto in data.get('produtos'):
+            carrinho.produtos.add(Produto.objects.get(pk=produto.get('id')))
         
         return JsonResponse(
             data=carrinho.to_dict(),
