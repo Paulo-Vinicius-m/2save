@@ -7,7 +7,7 @@ const navbarToggle = document.querySelector('.navbar-toggler');
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-      const response = await fetch('assets/js/perfil-restaurante.json');
+      const response = await fetch('/assets/js/perfil-restaurante.json');
       const userInfo = await response.json();
       
       // Atualizando os elementos no DOM
