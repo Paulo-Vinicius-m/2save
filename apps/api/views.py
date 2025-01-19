@@ -55,35 +55,77 @@ class view_restaurantes(View):
             safe=False,
         )
 
-
-class view_pedidos(View):
-
-    @autorize('customer')
-    def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
-        # Cria um pedido
-
-        data = request.body.decode('utf-8')
-        consumidor = Consumidor.objects.get(id=kwargs['token']['sub'])
-        produtos = Produto.objects.filter(id__in=data.get('produtos'))
-        pedido = Pedido.objects.create(consumidor=consumidor)
-        pedido.produtos.set(produtos)
-        
-        return JsonResponse(
-            data=model_to_dict(pedido),
-            status=201,
-            safe=False,
-        )
-    
+# /api/pedidos/
+class view_pedidos_restaurante(View):
     @autorize('restaurant')
     def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
-        # Busca por pedidos
+        # Busca por pedidos de um restaurante
 
-        pedidos = Pedido.objects.filter(restaurante__id=kwargs['token']['sub'])
+        restaurante = Restaurante.objects.get(id=kwargs['token']['sub'])
+        pedidos = Pedido.objects.filter(restaurante=restaurante)
+        
         return JsonResponse(
             data=[pedido.to_dict() for pedido in pedidos],
             status=200,
             safe=False,
         )
+
+    @autorize('restaurant')
+    def patch(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Atualiza um pedido
+
+        data = json.loads(request.body.decode('utf-8'))
+        pedido = Pedido.objects.get(restaurante=kwargs['token']['sub'], id=data.get('id'))
+
+        if data.get('aceito') is not None:
+            pedido.aceito = data.get('aceito')
+        if data.get('entregue') is not None:
+            pedido.entregue = data.get('entregue')
+        pedido.save()
+        
+        return JsonResponse(
+            data=pedido.to_dict(),
+            status=200,
+            safe=False,
+        )
+    
+class view_pedidos_customer(View):
+    @autorize('customer')
+    def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Busca por pedidos de um consumidor
+
+        consumidor = Consumidor.objects.get(id=kwargs['token']['sub'])
+        pedidos = Pedido.objects.filter(consumidor=consumidor)
+        
+        return JsonResponse(
+            data=[pedido.to_dict() for pedido in pedidos],
+            status=200,
+            safe=False,
+        )
+
+    @autorize('customer')
+    def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Cria um pedido
+
+        data = json.loads(request.body.decode('utf-8'))
+        consumidor = Consumidor.objects.get(id=kwargs['token']['sub'])
+
+        if len(set([Produto.objects.get(id=produto['id']).restaurante.id for produto in data.get('produtos')])) > 1:
+            raise ValueError('Todos os produtos devem ser do mesmo restaurante')
+        else:
+            pedido = Pedido.objects.create(
+                consumidor=consumidor,
+                restaurante=Restaurante.objects.get(id=Produto.objects.get(id=data.get('produtos')[0]['id']).restaurante.id),
+            )
+        pedido.produtos.set(Produto.objects.filter(id__in=[produto.get('id') for produto in data.get('produtos')]))
+        pedido.save()
+        
+        return JsonResponse(
+            data=pedido.to_dict(),
+            status=201,
+            safe=False,
+        )
+
 
 # /api/carrinho/  
 class view_carrinho(View):

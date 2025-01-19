@@ -120,10 +120,12 @@ class Pedido(models.Model):
     
     def to_dict(self) -> dict:
         return {
+            'id': self.id,
             'consumidor': self.consumidor.id,
             'restaurante': self.restaurante.id if self.restaurante else None,
             'produtos': produto_serializer(self.produtos.get_queryset()),
             'data': self.data,
+            'aceito': self.aceito,
             'entregue': self.entregue,
         }
     

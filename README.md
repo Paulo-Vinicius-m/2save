@@ -266,6 +266,95 @@ Atualiza o carrinho do consumidor autenticado, substituindo os produtos existent
 }
 ```
 
+### Documentação do Endpoint `/api/restaurante/pedidos`
+
+#### Descrição
+Este endpoint permite que restaurantes visualizem e atualizem os pedidos recebidos.
+
+#### URL
+`/api/restaurante/pedidos`
+
+#### Métodos HTTP
+- `GET`
+- `PATCH`
+
+#### Autenticação
+Este endpoint requer autenticação com permissão de 'restaurant'. O token de autenticação deve estar presente no cookie "Authorization".
+
+### `GET /api/restaurante/pedidos`
+#### Descrição
+Busca todos os pedidos recebidos pelo restaurante autenticado.
+
+#### Respostas
+- `200 OK`: Retorna os dados dos pedidos em formato JSON.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+[
+    {
+        "id": 1,
+        "consumidor": "ID do consumidor",
+        "restaurante": "ID do restaurante",
+        "produtos": [
+            {
+                "id": 1,
+                "nome": "Nome do produto",
+                "descricao": "Descrição do produto",
+                "preco": "Preço do produto",
+                "imagem": "URL da imagem do produto",
+                "tipo": "Tipo do produto"
+            },
+            ...
+        ],
+        "aceito": true,
+        "entregue": false,
+        "data": "2025-01-19T22:34:10.619Z"
+    },
+    ...
+]
+```
+
+### `PATCH /api/restaurante/pedidos`
+#### Descrição
+Atualiza o status de um pedido específico. O corpo da requisição deve conter o ID do pedido a ser alterado. Os novos valores dos campos 'aceito' e 'entregue' são opcionais.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "id": "ID do pedido",
+    "aceito": true,
+    "entregue": false
+}
+```
+
+#### Respostas
+- `200 OK`: Retorna os dados atualizados do pedido em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": "ID do pedido",
+    "consumidor": "ID do consumidor",
+    "restaurante": "ID do restaurante",
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Nome do produto",
+            "descricao": "Descrição do produto",
+            "preco": "Preço do produto",
+            "imagem": "URL da imagem do produto",
+            "tipo": "Tipo do produto"
+        },
+        ...
+    ],
+    "aceito": true,
+    "entregue": false,
+    "data": "2025-01-19T22:34:22.657Z"
+}
+```
 
 # Para rodar o projeto
 abra o terminal e rode os seguintes comendos:
