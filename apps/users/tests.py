@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Restaurante, Consumidor, Produto, Carrinho, Pedido, Pedido_Produto
+from .models import Restaurante, Consumidor, Produto, Carrinho, Pedido
 from settings.settings import SECRET_KEY
 import jwt
 
