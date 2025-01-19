@@ -67,12 +67,44 @@ def produto_serializer(produtos: models.QuerySet) -> dict:
         for produto in produtos
     ]
 
+class Carrinho(models.Model):
+    consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE, unique=True)
+    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE, blank=True, null=True)
+    produtos = models.ManyToManyField(Produto)
+    preco = models.DecimalField(max_digits=5, decimal_places=2, blank=True, default=0)
+
+    def to_dict(self) -> dict:
+        return {
+            'consumidor': self.consumidor.username,
+            'restaurante': self.restaurante.username,
+            'produtos': produto_serializer(self.produtos),
+        }
+    
+    def save(self, *args, **kwargs):
+
+        if not self._state.adding:
+            # Calcula o preço total do pedido
+            self.preco = 0
+            for produto in self.produtos.all():
+                self.preco += produto.preco
+            
+
+            # Verifica se todos os produtos são do mesmo restaurante
+            if self.produtos.count() == 0:
+                pass
+            elif len(set([produto.restaurante for produto in self.produtos.all()])) > 1:
+                raise ValueError('Todos os produtos devem ser do mesmo restaurante')
+            else:
+                self.restaurante = self.produtos.first().restaurante
+
+        super().save(*args, **kwargs)
+
 
 class Pedido(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE)
-    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE, blank=True)
     produtos = models.ManyToManyField(Produto)
-    preco = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    preco = models.DecimalField(max_digits=5, decimal_places=2, blank=True, default=0)
     data = models.DateTimeField(auto_now_add=True)
     aceito = models.BooleanField(default=False)
     entregue = models.BooleanField(default=False)
@@ -87,22 +119,43 @@ class Pedido(models.Model):
     def to_dict(self) -> dict:
         return {
             'consumidor': self.consumidor.username,
-            'produtos': self.produtos_serializer(),
+            'produtos': produto_serializer(self.produtos),
             'data': self.data,
             'entregue': self.entregue,
         }
     
     def save(self, *args, **kwargs):
 
-        # Calcula o preço total do pedido
-        self.preco = 0
-        for produto in self.produtos.all():
-            self.preco += produto.preco
+        if not self._state.adding:
+            # Calcula o preço total do pedido
+            self.preco = 0
+            for produto in self.produtos.all():
+                self.preco += produto.preco
+            
+            # Verifica se todos os produtos são do mesmo restaurante
+            if self.produtos.count() == 0:
+                pass
+            elif len(set([produto.restaurante for produto in self.produtos.all()])) > 1:
+                raise ValueError('Todos os produtos devem ser do mesmo restaurante')
+            else:
+                self.restaurante = self.produtos.first().restaurante
 
-        # Verifica se todos os produtos são do mesmo restaurante
-        if len(set([produto.restaurante for produto in self.produtos.all()])) > 1:
-            raise ValueError('Todos os produtos devem ser do mesmo restaurante')
-        else:
-            self.restaurante = self.produtos.first().restaurante
+        super().save(*args, **kwargs)
 
+class Pedido_Produto(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade = models.IntegerField()
+    
+    def __str__(self):
+        return f'{self.pedido.consumidor.username} - {self.produto.nome}'
+
+    class Meta:
+        verbose_name = 'Pedido Produto'
+        verbose_name_plural = 'Pedidos Produtos'
+    
+    def save(self, *args, **kwargs):
+        if self.produto not in self.pedido.produtos.all():
+            raise ValueError('Produto não pertence ao pedido')
+        
         super().save(*args, **kwargs)

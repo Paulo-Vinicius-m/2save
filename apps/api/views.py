@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpRequest, HttpResponse, HttpResponseRedirect
-from users.models import Restaurante, Consumidor, Produto, produto_serializer, Pedido
+from users.models import Restaurante, Consumidor, Produto, produto_serializer, Pedido, Carrinho
 from django.core.serializers import serialize
 from django.forms.models import model_to_dict
 from users.utils import autorize
@@ -107,6 +107,37 @@ class view_pedidos(View):
         pedidos = Pedido.objects.filter(restaurante__id=kwargs['token']['sub'])
         return JsonResponse(
             data=[pedido.to_dict() for pedido in pedidos],
+            status=200,
+            safe=False,
+        )
+    
+class view_carrinho(View):
+    @autorize('customer')
+    def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Busca por carrinho
+
+        try:
+            carrinho = Carrinho.objects.get(consumidor__id=kwargs['token']['sub'])
+        except Carrinho.DoesNotExist:
+            carrinho = Carrinho.objects.create(consumidor=Consumidor.objects.get(id=kwargs['token']['sub']))
+
+        return JsonResponse(
+            data=carrinho.to_dict(),
+            status=200,
+            safe=False,
+        )
+    
+    @autorize('customer')
+    def put(self, request: HttpRequest, **kwargs) -> HttpResponse:
+        # Atualiza o carrinho
+
+        data = request.body.decode('utf-8')
+        carrinho = Carrinho.objects.get(consumidor__id=kwargs['token']['sub'])
+        produtos = Produto.objects.filter(id__in=data.get('produtos'))
+        carrinho.produtos.set(produtos, clear=True)
+        
+        return JsonResponse(
+            data=carrinho.to_dict(),
             status=200,
             safe=False,
         )

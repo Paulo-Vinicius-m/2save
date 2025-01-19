@@ -6,4 +6,5 @@ app_name = 'api'
 urlpatterns = [
     path('restaurantes', views.view_restaurantes.as_view(), name='restaurantes'),
     path('pedidos', views.view_pedidos.as_view(), name='pedidos'),
+    path('carrinho', views.view_carrinho.as_view(), name='carrinho'),
 ]
