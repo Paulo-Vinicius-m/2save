@@ -60,6 +60,98 @@ function mudarSecoes() {
 
 async function carregarDados() {
     try {
+        const response = await fetch('/api/restaurantes');
+        const restaurantes = await response.json();
+
+        // referencias das secoes
+        const secaoRestaurantes = document.getElementById('secao1');
+        const secaoBebidas = document.getElementById('secao2');
+        const secaoRefeicoes = document.getElementById('secao3');
+
+        // Limpa as seções antes de adicionar os novos dados
+        secaoRestaurantes.innerHTML = '';
+        secaoBebidas.innerHTML = '';
+        secaoRefeicoes.innerHTML = '';
+
+        for(const restaurante of restaurantes) {
+            // Criação do card para restaurante
+            const cardRestaurante = document.createElement('div');
+            cardRestaurante.className = 'card-custom';
+
+            // Fetch para obter a logo do restaurante
+            let logoURL = restaurante.logo;
+            if(logoURL) {
+                try{
+                    const logoResponse = await fetch(logoURL);
+                    if(logoResponse.ok) {
+                        logoURL = logoResponse.url;
+                    } else {
+                        logoURL = '/assets/img/tela-inicial/restaurante.png';
+                    }
+                } catch(error) {
+                    console.error('Erro ao carregar a logo:', error);
+                    logoURL = '/assets/img/tela-inicial/restaurante.png';
+                }
+            }else {
+                logoURL = '/assets/img/tela-inicial/restaurante.png';
+            }
+
+            // HTML do card do restaurante
+            cardRestaurante.innerHTML = `
+                <div class="container-imagem">
+                    <img src="${logoURL}" alt="Logo do restaurante ${restaurante.username}">
+                </div>
+                <div class="container-informacoes">
+                    <h2>${restaurante.username}</h2>
+                </div>
+            `;
+
+            secaoRestaurantes.appendChild(cardRestaurante);
+
+            // Adiciona os pratos do restaurante
+            restaurante.pratos.forEach(prato => {
+                const cardPrato = document.createElement('div');
+                cardPrato.className = 'card-custom';
+                cardPrato.innerHTML = `
+                    <div class="container-imagem">
+                        <img src="${prato.imagem || 'assets/img/default-food.png'}" alt="Imagem do prato ${prato.nome}">
+                    </div>
+                    <div class="container-informacoes">
+                        <h2>${prato.nome}</h2>
+                        <p>${prato.descricao}</p>
+                        <p>Preço: R$ ${prato.preco}</p>
+                    </div>
+                `;
+                secaoRefeicoes.appendChild(cardPrato);
+            });
+
+            // Adiciona as bebidas do restaurante
+            restaurante.bebidas.forEach(bebida => {
+                const cardBebida = document.createElement('div');
+                cardBebida.className = 'card-custom';
+                cardBebida.innerHTML = `
+                    <div class="container-imagem">
+                        <img src="${bebida.imagem || 'assets/img/default-drink.png'}" alt="Imagem da bebida ${bebida.nome}">
+                    </div>
+                    <div class="container-informacoes">
+                        <h2>${bebida.nome}</h2>
+                        <p>${bebida.descricao}</p>
+                        <p>Preço: R$ ${bebida.preco}</p>
+                    </div>
+                `;
+                secaoBebidas.appendChild(cardBebida);
+            });
+            
+        }
+
+    } catch(error) {
+        console.error('Erro ao carregar os dados dos restaurantes:', error);
+    }
+}
+
+/*
+async function carregarDados() {
+    try {
         const response = await fetch('assets/js/tela-inicial.json');
         const dados = await response.json();
 
@@ -89,5 +181,5 @@ async function carregarDados() {
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
     }
-}
+} */
 
