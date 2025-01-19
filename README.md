@@ -34,37 +34,28 @@ Workspace: Collecting workspace information
 ### Documentação do Endpoint `/api/alterar-cardapio`
 
 #### Descrição
-Este endpoint permite que restaurantes criem, atualizem e deletem produtos do cardápio.
+Este endpoint permite que restaurantes criem, atualizem e deletem os produtos de seu cardápio.
 
 #### URL
 `/api/alterar-cardapio`
 
 #### Métodos HTTP
-- 
-
-POST
-
-
+- `POST`
 - `PUT`
 - `DELETE`
 
 #### Autenticação
-Este endpoint requer autenticação com permissão de 'restaurant'. O token de autenticação deve ser enviado no cabeçalho da requisição.
-
-#### Exemplo de Cabeçalho de Autenticação
-```http
-Authorization: Bearer <seu_token_aqui>
-```
+Este endpoint requer autenticação com permissão de 'restaurant'. O token de autenticação deve estar presente no cookie "Authorization".
 
 ### 
 
-POST /api/alterar-cardapio
+#### POST /api/alterar-cardapio
 
 
-#### Descrição
-Cria um novo produto associado a um restaurante.
+##### Descrição
+Cria um novo produto associado ao restaurante.
 
-#### Corpo da Requisição (JSON)
+##### Corpo da Requisição (JSON)
 ```json
 {
     "nome": "Nome do produto",
@@ -89,7 +80,6 @@ Cria um novo produto associado a um restaurante.
     "preco": "Preço do produto",
     "imagem": "URL da imagem do produto",
     "tipo": "Tipo do produto",
-    "restaurante": "ID do restaurante"
 }
 ```
 
@@ -123,7 +113,6 @@ Atualiza um produto existente.
     "preco": "Preço do produto",
     "imagem": "URL da imagem do produto",
     "tipo": "Tipo do produto",
-    "restaurante": "ID do restaurante"
 }
 ```
 
