@@ -356,6 +356,101 @@ Atualiza o status de um pedido específico. O corpo da requisição deve conter 
 }
 ```
 
+### Documentação do Endpoint `/api/customer/pedidos`
+
+#### Descrição
+Este endpoint permite que os consumidores visualizem e criem pedidos.
+
+#### URL
+`/api/customer/pedidos`
+
+#### Métodos HTTP
+- `GET`
+- `POST`
+
+#### Autenticação
+Este endpoint requer autenticação com permissão de 'customer'. O token de autenticação deve estar presente no cookie "Authorization".
+
+### `GET /api/customer/pedidos`
+#### Descrição
+Busca todos os pedidos feitos pelo consumidor autenticado.
+
+#### Respostas
+- `200 OK`: Retorna os dados dos pedidos em formato JSON.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+[
+    {
+        "id": "ID do pedido",
+        "consumidor": "ID do consumidor",
+        "restaurante": "ID do restaurante",
+        "produtos": [
+            {
+                "id": 1,
+                "nome": "Nome do produto",
+                "descricao": "Descrição do produto",
+                "preco": "Preço do produto",
+                "imagem": "URL da imagem do produto",
+                "tipo": "Tipo do produto"
+            },
+            ...
+        ],
+        "aceito": true,
+        "entregue": false,
+        "data": "2025-01-19T22:30:44.927Z"
+    },
+    ...
+]
+```
+
+### `POST /api/customer/pedidos`
+#### Descrição
+Cria um novo pedido para o consumidor autenticado.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "produtos": [
+        {
+            "id": "ID do produto",
+            "quantidade": 3
+        },
+        ...
+    ]
+}
+```
+
+#### Respostas
+- `201 Created`: Retorna os dados do pedido criado em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "id": "ID do pedido",
+    "consumidor": "ID do consumidor",
+    "restaurante": "ID do restaurante",
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Nome do produto",
+            "descricao": "Descrição do produto",
+            "preco": "Preço do produto",
+            "imagem": "URL da imagem do produto",
+            "tipo": "Tipo do produto"
+        },
+        ...
+    ],
+    "aceito": false,
+    "entregue": false,
+    "data_criacao": "2025-01-19T22:52:42.596Z"
+}
+```
+
+
 # Para rodar o projeto
 abra o terminal e rode os seguintes comendos:
 
