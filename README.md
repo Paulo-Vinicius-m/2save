@@ -34,4 +34,3 @@ docker build -t comer_bem https://github.com/Paulo-Vinicius-m/2save.git#main
 docker run -p 8000:8000 comer_bem
 
 Após isso é só abrir 127.0.0.1:8000/register no navegador e se cadastrar! (os templates html ainda não conseguem realizar autenticação e autorização adequadamente. Para explorar a API de verdade é necessário usar o Postman)
-
