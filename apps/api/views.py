@@ -14,19 +14,17 @@ class view_restaurantes(View):
     def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Busca por nome de restaurante
 
-        name = request.GET.get('username', default='')
-        restaurantes = [
-            {
-                'username': restautante.username,
-                'cnpj': restautante.cnpj,
-                'email': restautante.email,
-                'telefone': restautante.telefone,
-                'logo': restautante.logo.url if restautante.logo else None,
-                'pratos': produto_serializer(Produto.objects.filter(restaurante=restautante, tipo='prato')),
-                'bebidas': produto_serializer(Produto.objects.filter(restaurante=restautante, tipo='bebida')),
-            }
-            for restautante in Restaurante.objects.filter(username__icontains=name)
-        ]
+        data = json.loads(request.body.decode('utf-8'))
+        name = data.get('username')
+        id = data.get('id')
+
+        if id:
+            restaurantes =Restaurante.objects.get(id=int(id)).to_dict()
+
+        else:
+            restaurantes = [
+                restaurante.to_dict() for restaurante in Restaurante.objects.filter(username__icontains=name)
+            ]
         
         return JsonResponse(
             data=restaurantes,

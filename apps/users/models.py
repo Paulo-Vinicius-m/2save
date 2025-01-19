@@ -20,7 +20,22 @@ class Restaurante(User):
     def generate_token(self) -> str:
         return jwt.encode(payload={'sub': str(self.id), 'name': self.username, 'class': 'restaurant'}, key=SECRET_KEY, algorithm='HS256')
 
-
+    def to_dict(self) -> dict:
+        return {
+            'username': self.username,
+                'id': self.id,
+                'cnpj': self.cnpj,
+                'email': self.email,
+                'telefone': self.telefone,
+                'logo': self.logo.url if self.logo else None,
+                'estado': self.estado,
+                'cidade': self.cidade,
+                'endereco': self.endereco,
+                'numero': self.numero,
+                'pratos': produto_serializer(Produto.objects.filter(restaurante=self, tipo='prato')),
+                'bebidas': produto_serializer(Produto.objects.filter(restaurante=self, tipo='bebida')),
+        }
+    
     class Meta:
         verbose_name = 'Restaurante'
         verbose_name_plural = 'Restaurantes'
