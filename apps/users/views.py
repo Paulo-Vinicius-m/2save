@@ -28,18 +28,18 @@ def register(request: HttpRequest) -> HttpResponse:
     identificador = payload['identificador']
     
     if len(name) not in range(4, 20):
-        return JsonResponse({'error': 'Invalid name length'}, status=400)
+        return HttpResponse(status=400, content='Name must be between 4 and 20 characters')
     
     if len(password) > 25:
-        return JsonResponse({'error': 'Invalid password length'}, status=400)
+        return HttpResponse(status=400, content='Password too long')
     
     if email1 != email2:
-        return JsonResponse({'error': "emails don't match"}, status=400)
+        return HttpResponse(status=400, content='Emails do not match')
     
     # TODO - verify if it's a valid email
 
     if User.objects.filter(username=name) or User.objects.filter(email=email1):
-        return JsonResponse({'error': 'User already exists'}, status=400)
+        return HttpResponse(status=400, content='User already exists')
     
     if tipo == 'R':
         user = Restaurante.objects.create_user(
@@ -48,16 +48,18 @@ def register(request: HttpRequest) -> HttpResponse:
             password=password,
             cnpj=identificador
         )
+
     elif tipo == 'C':
         user = Consumidor.objects.create_user(
             username=name,
             email=email1,
             password=password,
             cpf=identificador
-        )
+        ) 
+    else:
+        return HttpResponse(status=400, content='Invalid user type')
 
-    token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'customer'}, key=SECRET_KEY, algorithm='HS256')
-    #return JsonResponse({'message': 'User created', 'token': token}, status=201)
+    token = user.generate_token()
     response = JsonResponse({'message': 'User created', 'token': token}, status=201)
     response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
     return response
@@ -78,11 +80,18 @@ def login(request: HttpRequest) -> HttpResponse:
     user = User.objects.get(email=email)
     
     if user.check_password(password):
-        token = jwt.encode(payload={'sub': str(user.id), 'name': user.username, 'class': 'customer'},key=SECRET_KEY, algorithm='HS256')
+        if Restaurante.objects.filter(id=user.id):
+            user = Restaurante.objects.get(id=user.id)
+        elif Consumidor.objects.filter(id=user.id):
+            user = Consumidor.objects.get(id=user.id)
+        else:
+            return HttpResponse(status=500, content='Usuário inválido')
+        
+        token = user.generate_token()
         response = JsonResponse({'message': 'User authenticated', 'token': token}, status=200)
         response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
         return response
     else:
-        return JsonResponse({'error': 'Invalid credentials'}, status=401)
+        return HttpResponse(status=401, content='Invalid credentials')
 
 
