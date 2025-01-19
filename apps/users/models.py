@@ -77,9 +77,9 @@ class Carrinho(models.Model):
 
     def to_dict(self) -> dict:
         return {
-            'consumidor': self.consumidor.username,
-            'restaurante': self.restaurante.username,
-            'produtos': produto_serializer(self.produtos),
+            'consumidor': self.consumidor.id,
+            'restaurante': self.restaurante.id if self.restaurante else None,
+            'produtos': produto_serializer(self.produtos.get_queryset()),
         }
     
     def save(self, *args, **kwargs):
