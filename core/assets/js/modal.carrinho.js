@@ -13,7 +13,6 @@ function fecharModal() {
     modalCarrinho.classList.remove('ativo')
 }
 
-
 const iconCarrinho = document.getElementById('icon-carrinho');
 iconCarrinho.addEventListener('click', abrirModal);
 
