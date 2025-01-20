@@ -7,26 +7,66 @@ import jwt
 class RestauranteModelTest(TestCase):
     def setUp(self):
         self.restaurante = Restaurante.objects.create_user(
-            username='restaurante1',
+            username='test_restaurant',
             password='password123',
             cnpj='12345678901234',
+            telefone='12345678901',
             estado='RN',
             cidade='Natal',
-            endereco='Rua A',
+            endereco='Rua Teste',
             numero='123'
         )
 
     def test_restaurante_creation(self):
-        self.assertEqual(self.restaurante.username, 'restaurante1')
+        self.assertIsInstance(self.restaurante, Restaurante)
+        self.assertEqual(self.restaurante.username, 'test_restaurant')
         self.assertEqual(self.restaurante.cnpj, '12345678901234')
+        self.assertEqual(self.restaurante.telefone, '12345678901')
+        self.assertEqual(self.restaurante.estado, 'RN')
+        self.assertEqual(self.restaurante.cidade, 'Natal')
+        self.assertEqual(self.restaurante.endereco, 'Rua Teste')
+        self.assertEqual(self.restaurante.numero, '123')
+
+    def test_restaurante_str(self):
+        self.assertEqual(str(self.restaurante), 'test_restaurant')
 
     def test_generate_token(self):
         token = self.restaurante.generate_token()
-        decoded = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-        self.assertEqual(decoded['sub'], str(self.restaurante.id))
-        self.assertEqual(decoded['name'], self.restaurante.username)
-        self.assertEqual(decoded['class'], 'restaurant')
+        decoded_token = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        self.assertEqual(decoded_token['sub'], str(self.restaurante.id))
+        self.assertEqual(decoded_token['name'], self.restaurante.username)
+        self.assertEqual(decoded_token['class'], 'restaurant')
 
+    def test_to_dict(self):
+        produto_prato = Produto.objects.create(
+            nome='Prato Teste',
+            descricao='Descricao Teste',
+            preco=10.00,
+            restaurante=self.restaurante,
+            tipo='prato'
+        )
+        produto_bebida = Produto.objects.create(
+            nome='Bebida Teste',
+            descricao='Descricao Teste',
+            preco=5.00,
+            restaurante=self.restaurante,
+            tipo='bebida'
+        )
+        expected_dict = {
+            'username': self.restaurante.username,
+            'id': self.restaurante.id,
+            'cnpj': self.restaurante.cnpj,
+            'email': self.restaurante.email,
+            'telefone': self.restaurante.telefone,
+            'logo': None,
+            'estado': self.restaurante.estado,
+            'cidade': self.restaurante.cidade,
+            'endereco': self.restaurante.endereco,
+            'numero': self.restaurante.numero,
+            'pratos': [produto_prato.to_dict()],
+            'bebidas': [produto_bebida.to_dict()],
+        }
+        self.assertEqual(self.restaurante.to_dict(), expected_dict)
 
 class ConsumidorModelTest(TestCase):
     def setUp(self):
@@ -172,7 +212,12 @@ class PedidoModelTest(TestCase):
         self.assertEqual(self.pedido.produtos.count(), 2)
         self.assertEqual(self.pedido.preco, 22.00, f'{[produto.preco for produto in self.pedido.produtos.all()]}')
 
-    '''def test_pedido_add_produto_again(self):
+    def test_pedido_validate_payment(self):
+        
+        self.save()
+        self.assertTrue(self.pedido.validate_payment(22.00))
+        self.assertFalse(self.pedido.validate_payment(21.00))
+    '''def test_pedido_add_same_produto_again(self):
         self.pedido.produtos.add(self.produto1)
         self.pedido.save()
         self.assertEqual(self.pedido.produtos.count(), 2)

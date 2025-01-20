@@ -13,6 +13,6 @@ urlpatterns = [
     path('restaurante/perfil', views.r_perfil, name='rperfil'),
     path('meu-cardapio', views.r_cardapio, name='r_cardapio'),
     path('meus-pedidos', views.pedidos, name='pedidos'),
-    path('<int:id>', views.c_cardapio, name='c_cardapio'),
+    path('oi', views.c_cardapio, name='c_cardapio'),
     path('buscar', views.buscar, name='buscar'),
 ]
