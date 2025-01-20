@@ -14,9 +14,13 @@ class view_restaurantes(View):
     def get(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Busca por nome de restaurante
 
-        data = json.loads(request.body.decode('utf-8'))
-        name = data.get('username')
-        id = data.get('id')
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            name = data.get('username')
+            id = data.get('id')
+        except:
+            name = ''
+            id = ''
 
         if id:
             restaurantes =Restaurante.objects.get(id=int(id)).to_dict()
