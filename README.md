@@ -22,14 +22,71 @@ Só aceita **POST**. O request body deve conter:
 
 Retorna um json com o token de acesso.
 
-## /api/customer/home (protegido)
-Só aceita **GET**. O body deve conter o nome do restaurante que deseja pesquisar (name)
+### Documentação do Endpoint `/api/restaurantes`
 
-Retorna um json com os restaurantes que se encaixam na pesquisa.
+#### Descrição
+Este endpoint permite que os usuários busquem e atualizem informações de restaurantes.
 
-Paulo-Vinicius-m: Gere uma documentação do endpoint /api/alterar-cardapio (definida pela classe view_produtos) para que os desenvolvedores front end saibam utilizá-lo
+#### URL
+`/api/restaurantes`
 
-Workspace: Collecting workspace information
+#### Métodos HTTP
+- `GET`
+- `PUT`
+
+#### Autenticação
+Este endpoint requer autenticação. O token de autenticação deve estar no cookie "Authorization".
+
+### `GET /api/restaurantes`
+#### Descrição
+Busca informações de restaurantes por nome ou ID. Só é necessário passar uma das duas opções de filtragem.
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "username": "Nome do restaurante",
+    "id": "ID do restaurante"
+}
+```
+
+#### Respostas
+- `200 OK`: Retorna os dados do(s) restaurante(s) em formato JSON.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos.
+- `401 Unauthorized`: Se a autenticação falhar ou o usuário não tiver permissão.
+
+#### Exemplo de Resposta (JSON)
+Para busca por ID:
+```json
+{
+    "id": 1,
+    "username": "Nome do restaurante",
+    "email": "email@restaurante.com",
+    "cnpj": "00.000.000/0000-00",
+    "telefone": "(00) 0000-0000",
+    "estado": "Estado",
+    "cidade": "Cidade",
+    "endereco": "Endereço",
+    "numero": "Número"
+}
+```
+
+Para busca por nome:
+```json
+[
+    {
+        "id": 1,
+        "username": "Nome do restaurante",
+        "email": "email@restaurante.com",
+        "cnpj": "00.000.000/0000-00",
+        "telefone": "(00) 0000-0000",
+        "estado": "Estado",
+        "cidade": "Cidade",
+        "endereco": "Endereço",
+        "numero": "Número"
+    },
+    ...
+]
+```
 
 ### Documentação do Endpoint `/api/alterar-cardapio`
 
