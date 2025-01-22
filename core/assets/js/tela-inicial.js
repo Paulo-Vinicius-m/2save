@@ -114,7 +114,7 @@ async function carregarDados() {
                 cardPrato.className = 'card-custom';
                 cardPrato.innerHTML = `
                     <div class="container-imagem">
-                        <img src="${prato.imagem || 'assets/img/default-food.png'}" alt="Imagem do prato ${prato.nome}">
+                        <img src="${prato.imagem || '/assets/img/tela-inicial/refeicoes.png'}" alt="Imagem do prato ${prato.nome}">
                     </div>
                     <div class="container-informacoes">
                         <h2>${prato.nome}</h2>
@@ -131,7 +131,7 @@ async function carregarDados() {
                 cardBebida.className = 'card-custom';
                 cardBebida.innerHTML = `
                     <div class="container-imagem">
-                        <img src="${bebida.imagem || 'assets/img/default-drink.png'}" alt="Imagem da bebida ${bebida.nome}">
+                        <img src="${bebida.imagem || '/assets/img/tela-inicial/bebida.png'}" alt="Imagem da bebida ${bebida.nome}">
                     </div>
                     <div class="container-informacoes">
                         <h2>${bebida.nome}</h2>
