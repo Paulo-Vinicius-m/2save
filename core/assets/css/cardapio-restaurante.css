@@ -139,6 +139,7 @@ body {
 
 /* MODAL - FIM */
 
+/* CONTAINER PEDIDOS - INICIO*/
 main {
     display: flex;
     justify-content: center;
@@ -156,7 +157,7 @@ main {
     color: #000000;
     box-sizing: border-box;
     border: 1px solid #805A40;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0;
     width: 62%;
     height: 76px;
     padding-left: 3%;
@@ -165,7 +166,6 @@ main {
 
 .container-produtos {
     width: 62%;
-
 }
 
 .produto {
@@ -173,5 +173,18 @@ main {
     justify-content: center;
     align-items: center;
     gap: 40px;
-
+    border-bottom: 1px solid #805A40;
+    border-left: 1px solid #805A40;
+    border-right: 1px solid #805A40;
 }
+
+.produto:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.protudo-img {
+    
+}
+
+
+/* CONTAINER PEDIDOS - FIM*/
