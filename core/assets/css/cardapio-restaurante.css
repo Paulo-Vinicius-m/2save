@@ -144,4 +144,34 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+}
+
+.titulo-cardapio {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 48px;
+    color: #000000;
+    box-sizing: border-box;
+    border: 1px solid #805A40;
+    border-radius: 10px;
+    width: 62%;
+    height: 76px;
+    padding-left: 3%;
+    padding-top: 1%;
+}
+
+.container-produtos {
+    width: 62%;
+
+}
+
+.produto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
 }
