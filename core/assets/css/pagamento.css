@@ -32,6 +32,15 @@ body {
     
 }
 
+.logo-img {
+    width: 121px;
+    height: 47px;
+}
+
+.logo-img img {
+    width: 100%;
+    height: 100%;
+}
 
 main {
     background: linear-gradient(97.45deg, #F0F0F0 83.84%, #DCDCDC 108.05%);
