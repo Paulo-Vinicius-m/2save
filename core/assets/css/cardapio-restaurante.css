@@ -5,6 +5,7 @@ body {
     max-width: 1440px;
 }
 
+/* NAVBAR - INICIO */
 .navbar {
     display: flex; /* Habilita o flexbox */
     justify-content: center; /* Centraliza os itens horizontalmente */
@@ -102,3 +103,39 @@ body {
     background: #FC80194D;
     left: 35px; /* Segunda imagem 30px à direita da primeira */
 }
+/* NAVBAR - FIM */
+
+/* BUTÃO ADICIONAR PRODUTO - INICIO */
+.btn-adicionar-produto {
+    all: unset; /* Remove todos os estilos padrão */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 67px auto 65px 256px;
+    background: #FF6A00;
+    border-radius: 5px;
+    width: 257px;
+    height: 56px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+} 
+
+.btn-adicionar-produto span {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    margin-right: 10px;
+    text-align: center;
+}
+/* BUTÃO ADICIONAR PRODUTO - FIM */
+
+/* MODAL - INICIO */
+
+/* MODAL - FIM */
+
