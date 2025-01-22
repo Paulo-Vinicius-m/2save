@@ -15,26 +15,42 @@
 <body>
 
     <header class="header">
-        <nav class="navbar bg-body-tertiary">
-            <div class="container">
-              <a href="/inicio">
-                <div class="logo-img">
-                  <img src="assets/img/retangulo-header.png" alt="Logo Appetit">
-                </div>
-              </a>
-              <div>
-                <a class="navbar-brand" href="#">
-                    <img src="/assets/img/header/icon-busca.png" alt="Retangulo">
-                  </a>
-                  <a class="navbar-brand" href="#">
-                    <img src="/assets/img/header/icon-perfil.png" alt="Retangulo">
-                  </a>
-                  <a class="navbar-brand" href="#" id="icon-carrinho">
-                    <img src="/assets/img/header/icon-carrinho.png" alt="Retangulo">
-                  </a>
-              </div>
-            </div>
-          </nav>
+      <nav class="navbar navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <a href="/inicio"><img src="/assets/img/header/retangulo.png"  class="logo-top" alt=""></a>
+        <div class="container-imgs">
+          <div class="container-icon">
+            <img src="/assets/img/header/icon-busca.png" alt="Ícone de Busca">
+          </div>
+          <div class="container-person">
+            <img src="/assets/img/header/icon-perfil.png" alt="Ícone de Perfil">
+          </div>
+        </div>
+      </nav>
+    
+      <div class="menu" id="navbarMenu">
+        <ul>
+          <li>
+            <img src="/assets/img/menu/perfil.png" alt="Painel"/>
+            <a href="/restaurante/perfil">Painel</a>
+          </li>
+          <li>
+            <img src="/assets/img/menu/menu.png" alt="Cardápio" />
+            <a href="/meu-cardapio">Cardápio</a>
+          </li>
+          <li>
+            <img src="/assets/img/menu/pedido.png" alt="Pedidos" />
+            <a href="../meus-pedidos">Pedidos</a>
+          </li>
+          <li>
+            <img src="/assets/img/menu/logout.png" alt="Sair" />
+            <a href="#">Sair</a>
+          </li>
+        </ul>
+      </div>
     </header>
   
 
