@@ -43,7 +43,7 @@ def pedidos(request: HttpRequest) -> HttpResponse:
     return render(request, 'pedidos.html')
 
 #@autorize
-def c_cardapio(request: HttpRequest, id: int) -> HttpResponse:
+def c_cardapio(request: HttpRequest) -> HttpResponse:
     return render(request, 'cardapio-cliente.html')
 
 #@autorize
