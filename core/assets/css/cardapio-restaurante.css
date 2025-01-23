@@ -146,6 +146,7 @@ main {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    
 }
 
 .titulo-cardapio {
@@ -166,13 +167,13 @@ main {
 
 .container-produtos {
     width: 62%;
+    height: 100%;
+    margin-bottom: 193px;
 }
 
 .produto {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 40px;
     border-bottom: 1px solid #805A40;
     border-left: 1px solid #805A40;
     border-right: 1px solid #805A40;
@@ -183,8 +184,39 @@ main {
 }
 
 .protudo-img {
-    
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin: 10px 20px;
 }
 
+.protudo-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.produto-informacoes {
+    margin-right: 60px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.icon-mais {
+    margin-left: -20px;
+    margin-right: 50px;
+}
 
 /* CONTAINER PEDIDOS - FIM*/
+
+
+/* FOOTER */
+.rodape {
+    max-width: 1440px;
+    width: 100%;
+    height: 70px;
+    background-color: #D46D24;
+}
