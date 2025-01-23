@@ -95,13 +95,13 @@ body {
 .container-imgs .container-icon img:first-child {
     border-radius: 2px;
     background: #FC80194D;
-    left: 0; /* Primeira imagem na posição da esquerda */
+    left: 0; 
 }
   
 .container-imgs .container-person img:last-child {
     border-radius: 2px;
     background: #FC80194D;
-    left: 35px; /* Segunda imagem 30px à direita da primeira */
+    left: 35px; 
 }
 /* NAVBAR - FIM */
 
@@ -196,13 +196,18 @@ main {
 }
 
 .produto-informacoes {
-    margin-right: 60px;
+    margin-right: 30px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
     color: #000000;
+    width: 150px;
+}
+
+.produto-informacoes:nth-child(4), .produto-informacoes:nth-child(5)  {
+    width: 80px;
 }
 
 .icon-mais {
