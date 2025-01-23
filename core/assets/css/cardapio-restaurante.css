@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
     height: 100vh;
@@ -187,8 +187,45 @@ body {
 
 .form-lado-esquerdo label, .form-lado-direito label {
     display: block;
+    font-family: 'Hammersmith One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: #FFFFFF;
 }
 
+.form-lado-esquerdo input, .form-lado-direito input {
+    width: 259px;
+    height: 49px;
+    background: transparent;
+    box-sizing: border-box;
+    border: 1px solid #BAB7B7;
+    border-radius: 2px;
+    padding-left: 10px;
+    margin-top: 4px;
+    margin-bottom: 25px;
+}
+
+.form-lado-esquerdo input::placeholder, .form-lado-direito input::placeholder {
+    color: #FFFFFF;
+}
+
+.btn-salvar-produto {
+    margin: 50px auto;
+    width: 114px;
+    height: 29px;
+    background: #FF6A00;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    color: #FFFFFF;
+}
 
 
 /* MODAL - FIM */
