@@ -55,6 +55,43 @@
     </div>
   </header>
 
+  <!-- MODAL ADICIONAR PRODUTO -->
+  <div class="container-modal" id="container-modal">
+
+    <h2 class="titulo-adicionar-produto">Adicionar produto</h2>
+
+    <div class="icon-fechar-modal" id="icon-fechar-modal">
+      <img src="/assets/img/icon-fechar-modal.png" alt="Icone de fechar modal">
+    </div>
+
+    <form method="post" action="/api/alterar-cardapio" class="form-cadastro-produto" id="form-cadastro-produto">
+
+      <div class="form-lado-esquerdo">
+        <label for="nome">Nome do produto</label>
+        <input class="input-esquerdo" type="text" name="nome" id="nome" placeholder="Nome do Produto" required>
+
+        <label for="tipo">Categoria</label>
+        <input class="input-esquerdo" type="text" name="tipo" id="tipo" placeholder="Categoria: Bebida ou Refeição" required>
+
+        <label for="">Descrição</label>
+        <input class="input-esquerdo" type="text" name="descricao" id="descricao" placeholder="Descrição do Produto" required>
+      </div>
+
+      <div class="form-lado-direito">
+        <label for="imagem">Imagem do produto</label>
+        <input class="input-direito" type="file" name="imagem" id="imagem" accept="image/png, image/jpeg, image/jpg" required>
+
+        <label for="preco">Preço</label>
+        <input class="input-direito" type="number" name="preco" id="preco" placeholder="Valor do Produto" required>
+
+      </div>
+
+      <input type="submit" value="Salvar" class="btn-salvar-produto" id="btn-salvar-produto">
+
+    </form>
+
+  </div>
+
   <button class="btn-adicionar-produto" id="btn-adicionar-produto"><span>+</span> Adicionar produto</button>
 
   <main>
