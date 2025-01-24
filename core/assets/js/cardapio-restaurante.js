@@ -198,3 +198,16 @@ async function deletarProduto(produtoId) {
         alert("Erro ao tentar deletar o produto. Tente novamente mais tarde.");
     }
 }
+
+// Função para remover o produto visualmente da tela
+
+function removerProdutoDaTela(produtoId) {
+
+    const produto = document.getElementById(`produto-${produtoId}`);
+
+    if (produto) {
+
+        produto.remove();
+    }
+
+}
