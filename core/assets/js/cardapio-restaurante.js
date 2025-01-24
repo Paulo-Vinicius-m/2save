@@ -168,3 +168,33 @@ async function atualizarDadosProduto(event) {
         alert('Erro ao tentar atualizar o produto. Tente novamente mais tarde.');
     }
 }
+
+async function deletarProduto(produtoId) {
+    if (!confirm("Tem certeza que deseja excluir este produto?")) return;
+
+    try {
+        const response = await fetch('/api/alterar-cardapio', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: produtoId }),
+        });
+
+        if (response.ok) {
+            console.log(`Produto com ID ${produtoId} deletado com sucesso.`);
+            alert("Produto deletado com sucesso!");
+            removerProdutoDaTela(produtoId);
+        } else if (response.status === 401) {
+            alert("Não autorizado. Verifique seu token de autenticação.");
+        } else if (response.status === 400) {
+            alert("Erro nos dados enviados. Verifique as informações.");
+        } else {
+            throw new Error("Erro inesperado.");
+        }
+    } catch (error) {
+        console.error("Erro ao deletar o produto:", error);
+        alert("Erro ao tentar deletar o produto. Tente novamente mais tarde.");
+    }
+}
