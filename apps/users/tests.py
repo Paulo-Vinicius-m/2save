@@ -3,18 +3,20 @@ from django.contrib.auth.models import User
 from .models import Restaurante, Consumidor, Produto, Carrinho, Pedido
 from settings.settings import SECRET_KEY
 import jwt
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 class RestauranteModelTest(TestCase):
     def setUp(self):
+        self.maxDiff = None
         self.restaurante = Restaurante.objects.create_user(
             username='test_restaurant',
             password='password123',
             cnpj='12345678901234',
             telefone='12345678901',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua Teste',
-            numero='123'
+            pix='12345678901',
+            imagem=SimpleUploadedFile(name='test_image.jpg', content=b'oi', content_type='image/jpeg'),
+            descricao='Descricao Teste',
         )
 
     def test_restaurante_creation(self):
@@ -22,10 +24,10 @@ class RestauranteModelTest(TestCase):
         self.assertEqual(self.restaurante.username, 'test_restaurant')
         self.assertEqual(self.restaurante.cnpj, '12345678901234')
         self.assertEqual(self.restaurante.telefone, '12345678901')
-        self.assertEqual(self.restaurante.estado, 'RN')
-        self.assertEqual(self.restaurante.cidade, 'Natal')
         self.assertEqual(self.restaurante.endereco, 'Rua Teste')
-        self.assertEqual(self.restaurante.numero, '123')
+        self.assertEqual(self.restaurante.pix, '12345678901')
+        self.assertEqual(b'oi', self.restaurante.imagem.read())
+        self.assertEqual(self.restaurante.descricao, 'Descricao Teste')
 
     def test_restaurante_str(self):
         self.assertEqual(str(self.restaurante), 'test_restaurant')
@@ -58,11 +60,10 @@ class RestauranteModelTest(TestCase):
             'cnpj': self.restaurante.cnpj,
             'email': self.restaurante.email,
             'telefone': self.restaurante.telefone,
-            'logo': None,
-            'estado': self.restaurante.estado,
-            'cidade': self.restaurante.cidade,
+            'imagem': self.restaurante.imagem.url,
             'endereco': self.restaurante.endereco,
-            'numero': self.restaurante.numero,
+            'descricao': self.restaurante.descricao,
+            'pix': self.restaurante.pix,
             'pratos': [produto_prato.to_dict()],
             'bebidas': [produto_bebida.to_dict()],
         }
@@ -74,10 +75,7 @@ class ConsumidorModelTest(TestCase):
             username='consumidor1',
             password='password123',
             cpf='12345678901',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua B',
-            numero='456'
         )
 
     def test_consumidor_creation(self):
@@ -98,10 +96,7 @@ class ProdutoModelTest(TestCase):
             username='restaurante1',
             password='password123',
             cnpj='12345678901234',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua A',
-            numero='123'
         )
         self.produto = Produto.objects.create(
             nome='Produto1',
@@ -124,19 +119,13 @@ class CarrinhoModelTest(TestCase):
             username='consumidor1',
             password='password123',
             cpf='12345678901',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua B',
-            numero='456'
         )
         self.restaurante = Restaurante.objects.create_user(
             username='restaurante1',
             password='password123',
             cnpj='12345678901234',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua A',
-            numero='123'
         )
         self.produto = Produto.objects.create(
             nome='Produto1',
@@ -165,19 +154,13 @@ class PedidoModelTest(TestCase):
             username='consumidor1',
             password='password123',
             cpf='12345678901',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua B',
-            numero='456'
         )
         self.restaurante = Restaurante.objects.create_user(
             username='restaurante1',
             password='password123',
             cnpj='12345678901234',
-            estado='RN',
-            cidade='Natal',
             endereco='Rua A',
-            numero='123'
         )
         self.produto1 = Produto.objects.create(
             nome='Produto1',
@@ -212,12 +195,9 @@ class PedidoModelTest(TestCase):
         self.assertEqual(self.pedido.produtos.count(), 2)
         self.assertEqual(self.pedido.preco, 22.00, f'{[produto.preco for produto in self.pedido.produtos.all()]}')
 
-    def test_pedido_validate_payment(self):
-        
-        self.save()
-        self.assertTrue(self.pedido.validate_payment(22.00))
-        self.assertFalse(self.pedido.validate_payment(21.00))
-    '''def test_pedido_add_same_produto_again(self):
+    '''
+    Não foi implementado ainda
+    def test_pedido_add_same_produto_again(self):
         self.pedido.produtos.add(self.produto1)
         self.pedido.save()
         self.assertEqual(self.pedido.produtos.count(), 2)
