@@ -185,13 +185,13 @@ class view_produtos(View):
     def post(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Cria um produto
 
-        data = json.loads(request.body.decode('utf-8'))
+        data = request.POST
         restaurante = Restaurante.objects.get(id=kwargs['token']['sub'])
         produto = Produto.objects.create(
             nome=data.get('nome'),
             descricao=data.get('descricao'),
             preco=data.get('preco'),
-            imagem=data.get('imagem'),
+            imagem=request.FILES.get('imagem'),
             tipo=data.get('tipo'),
             restaurante=restaurante,
         )
@@ -206,12 +206,12 @@ class view_produtos(View):
     def put(self, request: HttpRequest, **kwargs) -> HttpResponse:
         # Atualiza um produto
 
-        data = json.loads(request.body.decode('utf-8'))
+        data = request.POST
         produto = Produto.objects.get(restaurante = kwargs['token']['sub'], id=data.get('id'))
         produto.nome = data.get('nome')
         produto.descricao = data.get('descricao')
         produto.preco = data.get('preco')
-        produto.imagem = data.get('imagem')
+        produto.imagem=request.FILES.get('imagem')
         produto.tipo = data.get('tipo')
         produto.save()
         

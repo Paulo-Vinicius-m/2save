@@ -2,25 +2,131 @@
 https://www.figma.com/design/AndxMt8yxIANqOHPPgoIdm/Appetit?node-id=24-370&t=1IAGZ5TfVU2uYNcX-0
 
 # Pontos da API
-Os pontos protegidos só podem ser acessados se o token de acesso for passado no header da requisição.
 
-## /api/users/register
-Só aceita **POST**. O request body deve conter (dentro dos parênteses estão os nomes das keys do formulário):
-- Username (name)
-- Email (email)
-- Confirmação do email (email2)
-- Senha (password)
-- Tipo de usuário: "R" para restaurante e "C" para consumidor (tipo)
-- cpf/cnpj (identificador)
+### Documentação do Endpoint `/api/users/register`
 
-Retorna um json com o token de acesso.
+#### Descrição
+Este endpoint permite que novos usuários se registrem na plataforma.
 
-## /api/users/login
-Só aceita **POST**. O request body deve conter:
-- Email (email)
-- Senha (password)
+#### URL
+`/api/users/register`
 
-Retorna um json com o token de acesso.
+#### Método HTTP
+- POST
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "username": "Nome de usuário",
+    "email1": "email@exemplo.com",
+    "email2": "email@exemplo.com",
+    "descricao": "Descrição do usuário (opcional para consumidores)",
+    "pix": "Chave PIX (opcional para consumidores)",
+    "password": "Senha",
+    "tipo": "Tipo de usuário (R para Restaurante, C para Consumidor)",
+    "identificador": "CNPJ ou CPF",
+    "endereco": "Endereço do usuário",
+    "imagem": "URL do logo (opcional)"
+}
+```
+
+#### Respostas
+- `201 Created`: Retorna os dados do usuário criado em formato JSON, incluindo um token de autenticação.
+- `400 Bad Request`: Se os dados fornecidos forem inválidos ou o tipo de usuário for inválido.
+
+#### Exemplo de Resposta (JSON)
+Se for um restaurante:
+```json
+{
+    "username": "self.username",
+    "id": "self.id",
+    "cnpj": "self.cnpj",
+    "email": "self.email",
+    "telefone": "self.telefone",
+    "imagem": "self.imagem.url if self.imagem else None",
+    "endereco": "self.endereco",
+    "descricao": "self.descricao",
+    "pix": "self.pix",
+    "pratos": "produto_serializer(Produto.objects.filter(restaurante=self, tipo='prato'))",
+    "bebidas": "produto_serializer(Produto.objects.filter(restaurante=self, tipo='bebida'))"
+}
+```
+
+Se for um consumidor:
+```json
+{
+    "nome": "self.username",
+    "id": "self.id",
+    "cpf": "self.cpf",
+    "email": "self.email",
+    "telefone": "self.telefone",
+    "endereco": "self.endereco"
+}
+```
+
+#### Exemplo de Cabeçalho de Resposta
+```http
+Set-Cookie: Authorization=<token>; HttpOnly; SameSite=Strict
+```
+
+#### Notas
+- O token de autenticação também é definido como um cookie `Authorization` com as flags `HttpOnly` e `SameSite=Strict` para segurança adicional.
+
+### Documentação do Endpoint `/api/users/login`
+
+#### Descrição
+Este endpoint permite que usuários autenticados façam login na plataforma.
+
+#### URL
+`/api/users/login`
+
+#### Método HTTP
+- 
+
+POST
+
+
+
+#### Corpo da Requisição (JSON)
+```json
+{
+    "email": "email@exemplo.com",
+    "password": "Senha"
+}
+```
+
+#### Respostas
+- `200 OK`: Retorna uma mensagem de sucesso, um token de autenticação e os dados do usuário em formato JSON.
+- `401 Unauthorized`: Se as credenciais fornecidas forem inválidas.
+- `405 Method Not Allowed`: Se o método HTTP utilizado não for 
+
+POST
+
+.
+
+#### Exemplo de Resposta (JSON)
+```json
+{
+    "message": "User authenticated",
+    "token": "Token de autenticação",
+    "user": {
+        "id": 1,
+        "name": "Nome de usuário",
+        "email": "email@exemplo.com",
+        "tipo": "Tipo de usuário",
+        "endereco": "Endereço do usuário"
+        ... // E mais campos se for um restaurante
+    }
+}
+```
+
+#### Exemplo de Cabeçalho de Resposta
+```http
+Set-Cookie: Authorization=<token>; HttpOnly; SameSite=Strict
+```
+
+#### Notas
+- O token de autenticação também é definido como um cookie `Authorization` com as flags `HttpOnly` e `SameSite=Strict` para segurança adicional.
 
 ### Documentação do Endpoint `/api/restaurantes`
 
@@ -63,10 +169,10 @@ Para busca por ID:
     "email": "email@restaurante.com",
     "cnpj": "00.000.000/0000-00",
     "telefone": "(00) 0000-0000",
-    "estado": "Estado",
-    "cidade": "Cidade",
     "endereco": "Endereço",
-    "numero": "Número"
+    "imagem": "Número",
+    "pix": "pix",
+    "descricao": "descrição do restaurante",
 }
 ```
 
@@ -79,10 +185,10 @@ Para busca por nome:
         "email": "email@restaurante.com",
         "cnpj": "00.000.000/0000-00",
         "telefone": "(00) 0000-0000",
-        "estado": "Estado",
-        "cidade": "Cidade",
         "endereco": "Endereço",
-        "numero": "Número"
+        "imagem": "Número",
+        "pix": "pix",
+        "descricao": "descrição do restaurante",
     },
     ...
 ]
@@ -221,12 +327,12 @@ Busca o carrinho de compras do consumidor autenticado.
 #### Exemplo de Resposta (JSON)
 ```json
 {
-    "id": 1,
+    "id": "ID do carrinho",
     "consumidor": "ID do consumidor",
-    "restaurante": null,
+    "restaurante": "ID do restaurante",
     "produtos": [
         {
-            "id": 1,
+            "id": "ID do produto",
             "nome": "Nome do produto",
             "descricao": "Descrição do produto",
             "preco": "Preço do produto",
