@@ -32,10 +32,12 @@ async function enviarProduto(event) {
 
     const nome = document.getElementById('nome').value.trim();
     const descricao = document.getElementById('descricao').value.trim();
-    const preco = Number(document.getElementById('preco').value);
+    const precoInput = Number(document.getElementById('preco').value);
     const imagem = document.getElementById('imagem');
     const tipo = document.getElementById('tipo').value.trim();
     
+    const preco = parseFloat(precoInput).toFixed(2);
+
     // Criando o FormData
     const formData = new FormData();
     formData.append('nome', nome);
@@ -80,25 +82,25 @@ function limparInputs() {
     document.getElementById('tipo').value = '';
 }
 
-// Função para adicionar o produto dinamicamente na tela
+// função abrir modal para atualizar os campos do formulario
 function adicionarProdutoNaTela(dadosProduto) {
     const containerCardapio = document.getElementById('container-cardapio');
 
     const novoProduto = document.createElement('div');
     novoProduto.classList.add('produto');
-    novoProduto.id = 'produto';
+    novoProduto.id = `produto-${dadosProduto.id}`; // Usa o ID do produto do backend
 
     novoProduto.innerHTML = `
         <div class="protudo-img">
             <img src="${dadosProduto.imagem || '/assets/img/tela-inicial/bebida.png'}" alt="Imagem da Comida">
-            </div>
-            <p class="produto-informacoes" id="produto-nome">${dadosProduto.nome || 'Produto'}</p>
-            <p class="produto-informacoes" id="produto-valor">R$ ${dadosProduto.preco?.toFixed(2) || '0,00'}</p>
-            <p class="produto-informacoes" id="produto-tempo">${dadosProduto.tempo_preparo || '30 min'}</p>
-            <div class="icon-mais">
+        </div>
+        <p class="produto-informacoes" id="produto-nome">${dadosProduto.nome || 'Produto'}</p>
+        <p class="produto-informacoes" id="produto-valor">R$ ${dadosProduto.preco || '0,00'}</p>
+        <p class="produto-informacoes" id="produto-tempo">${dadosProduto.tempo_preparo || '30 min'}</p>
+        <div class="icon-mais" onclick="atualizarProduto(${JSON.stringify(dadosProduto)})">
             <img src="/assets/img/cardapio-restaurante/icon-mais.png" alt="Icone Mais">
-            </div>
-            <div class="icon-lixeira">
+        </div>
+        <div class="icon-lixeira" onclick="deletarProduto(${dadosProduto.id})">
             <img src="/assets/img/cardapio-restaurante/icon-lixeira.png" alt="Icone Lixeira">
         </div>
     `;
@@ -109,18 +111,17 @@ function adicionarProdutoNaTela(dadosProduto) {
 const formCadastroProduto = document.getElementById('form-cadastro-produto');
 formCadastroProduto.addEventListener('submit', enviarProduto);
 
-// função abrir modal para atualizar os campos do formulario
-function atualizarProduto(produto) {
-   // document.getElementById('produto-id').value = produto.id;
-    document.getElementById('nome').value = produto.nome;
-    document.getElementById('descricao').value = produto.descricao;
-    document.getElementById('preco').value = produto.preco;
-    document.getElementById('tipo').value = produto.tipo;
-    abrirModal();
-}
+function atualizarProduto(dadosProduto) {
+    // Abrir o modal de edição
+    containerModal.classList.add('ativo');
 
-const iconMais = document.getElementById('icon-mais');
-iconMais.addEventListener('click', atualizarProduto);
+    // Preencher os campos do modal com os dados do produto
+    document.getElementById('produto-id').value = dadosProduto.id || '';
+    document.getElementById('nome').value = dadosProduto.nome || '';
+    document.getElementById('descricao').value = dadosProduto.descricao || '';
+    document.getElementById('preco').value = dadosProduto.preco || '';
+    document.getElementById('tipo').value = dadosProduto.tipo || '';
+}
 
 // Função para enviar os dados atualizados para a API
 async function atualizarDadosProduto(event) {
@@ -200,7 +201,6 @@ async function deletarProduto(produtoId) {
 }
 
 // Função para remover o produto visualmente da tela
-
 function removerProdutoDaTela(produtoId) {
 
     const produto = document.getElementById(`produto-${produtoId}`);
@@ -211,3 +211,6 @@ function removerProdutoDaTela(produtoId) {
     }
 
 }
+
+novoProduto.querySelector('.icon-mais').addEventListener('click', () => atualizarProduto(dadosProduto));
+novoProduto.querySelector('.icon-lixeira').addEventListener('click', () => deletarProduto(dadosProduto.id));
