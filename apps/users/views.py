@@ -22,6 +22,10 @@ def register(request: HttpRequest) -> HttpResponse:
 
     name = payload['name']
     password = payload['password']
+    logo = request.FILES.get('imagem')
+    endereco = payload['endereco']
+    descricao = payload['descricao']
+    pix = payload['pix']
     email1 = payload['email']
     email2 = payload['email2']
     tipo = payload['tipo']
@@ -44,9 +48,14 @@ def register(request: HttpRequest) -> HttpResponse:
     if tipo == 'R':
         user = Restaurante.objects.create_user(
             username=name,
+            logo=logo,
             email=email1,
             password=password,
-            cnpj=identificador
+            cnpj=identificador,
+            endereco=endereco,
+            descricao=descricao,
+            pix=pix,
+            imagem=logo
         )
 
     elif tipo == 'C':
@@ -54,13 +63,15 @@ def register(request: HttpRequest) -> HttpResponse:
             username=name,
             email=email1,
             password=password,
-            cpf=identificador
+            cpf=identificador,
+            endereco=endereco
         ) 
     else:
         return HttpResponse(status=400, content='Invalid user type')
 
     token = user.generate_token()
-    response = JsonResponse({'message': 'User created', 'token': token}, status=201)
+    response = JsonResponse(status=201, data=user.to_dict()
+    )
     response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
     return response
 
@@ -88,7 +99,7 @@ def login(request: HttpRequest) -> HttpResponse:
             return HttpResponse(status=500, content='Usuário inválido')
         
         token = user.generate_token()
-        response = JsonResponse({'message': 'User authenticated', 'token': token}, status=200)
+        response = JsonResponse({'message': 'User authenticated', 'token': token, 'user': user.to_dict()}, status=200)
         response.set_cookie('Authorization', token, httponly=True, samesite='Strict')
         return response
     else:

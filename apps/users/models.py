@@ -8,11 +8,11 @@ class Restaurante(User):
     logo = models.ImageField(upload_to='logos/', blank=True)
     cnpj = models.CharField(max_length=14, unique=True)
     telefone = models.CharField(max_length=11, blank=True)
+    descricao = models.TextField(blank=True)
+    pix = models.CharField(max_length=20, blank=True)
+    imagem = models.ImageField(upload_to='restaurantes/', blank=True, null=True)
 
-    estado = models.CharField(max_length=2)
-    cidade = models.CharField(max_length=50)
     endereco = models.CharField(max_length=100)
-    numero = models.CharField(max_length=10)
     
     def __str__(self):
         return self.username
@@ -27,11 +27,10 @@ class Restaurante(User):
                 'cnpj': self.cnpj,
                 'email': self.email,
                 'telefone': self.telefone,
-                'logo': self.logo.url if self.logo else None,
-                'estado': self.estado,
-                'cidade': self.cidade,
+                'imagem': self.imagem.url if self.imagem else None,
                 'endereco': self.endereco,
-                'numero': self.numero,
+                'descricao': self.descricao,
+                'pix': self.pix,
                 'pratos': produto_serializer(Produto.objects.filter(restaurante=self, tipo='prato')),
                 'bebidas': produto_serializer(Produto.objects.filter(restaurante=self, tipo='bebida')),
         }
@@ -45,16 +44,23 @@ class Consumidor(User):
     cpf = models.CharField(max_length=11, unique=True)
     telefone = models.CharField(max_length=11, blank=True)
 
-    estado = models.CharField(max_length=2)
-    cidade = models.CharField(max_length=50)
     endereco = models.CharField(max_length=100)
-    numero = models.CharField(max_length=10)
     
     def __str__(self):
         return self.username
     
     def generate_token(self) -> str:
         return jwt.encode(payload={'sub': str(self.id), 'name': self.username, 'class': 'customer'}, key=SECRET_KEY, algorithm='HS256')
+
+    def to_dict(self) -> dict:
+        return {
+            'nome': self.username,
+            'id': self.id,
+            'cpf': self.cpf,
+            'email': self.email,
+            'telefone': self.telefone,
+            'endereco': self.endereco,
+        }
 
     class Meta:
         verbose_name = 'Consumidor'
@@ -63,7 +69,7 @@ class Consumidor(User):
 class Produto(models.Model):
     nome = models.CharField(max_length=50)
     descricao = models.TextField(blank=True)
-    preco = models.DecimalField(max_digits=5, decimal_places=2)
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
     imagem = models.ImageField(upload_to='produtos/', blank=True)
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=10, choices=[('prato', 'Prato'), ('bebida', 'Bebida')], default='prato')
@@ -88,7 +94,7 @@ class Carrinho(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE, unique=True)
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE, blank=True, null=True)
     produtos = models.ManyToManyField(Produto)
-    preco = models.DecimalField(max_digits=5, decimal_places=2, blank=True, default=0)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
 
     def to_dict(self) -> dict:
         return {
@@ -121,7 +127,7 @@ class Pedido(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE)
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE, blank=True)
     produtos = models.ManyToManyField(Produto)
-    preco = models.DecimalField(max_digits=5, decimal_places=2, blank=True, default=0)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     data = models.DateTimeField(auto_now_add=True)
     aceito = models.BooleanField(default=False)
     entregue = models.BooleanField(default=False)
